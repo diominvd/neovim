@@ -20,9 +20,10 @@ return {
 					visible = true,
 				},
 			},
-			window = {
-				position = "left",
-				width = 30,
+		window = {
+			position = "left",
+			width = 30,
+			border = "single",
 				mapping_options = {
 					noremap = true,
 					nowait = true,
