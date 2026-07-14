@@ -18,4 +18,7 @@ require("lazy").setup({
 		{ import = "plugins" },
 		{ import = "appearance" },
 	},
+	ui = {
+		border = "single",
+	},
 })
