@@ -19,8 +19,10 @@ return {
 				Lua = {
 					diagnostics = { globals = { "vim" } },
 					workspace = {
-						library = vim.api.nvim_get_runtime_file("", true),
+						library = vim.api.nvim_get_runtime_file("lua", true),
 						checkThirdParty = false,
+						maxPreload = 10000,
+						preloadFileSize = 5000,
 					},
 					telemetry = { enable = false },
 				},
@@ -33,7 +35,15 @@ return {
 					analysis = {
 						autoSearchPaths = true,
 						useLibraryCodeForTypes = true,
-						diagnosticMode = "workspace",
+						diagnosticMode = "openFilesOnly",
+						exclude = {
+							"**/__pycache__",
+							"**/node_modules",
+							"**/.git",
+							"**/venv",
+							"**/.venv",
+							"**/site-packages",
+						},
 					},
 				},
 			},
