@@ -21,3 +21,6 @@ undo/
 
 # sessions
 session/
+
+# lazy-lock
+lazy-lock.json
