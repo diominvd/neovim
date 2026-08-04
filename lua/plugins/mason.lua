@@ -21,7 +21,7 @@ return {
 		})
 
 		require("mason-tool-installer").setup({
-			ensure_installed = { "lua_ls", "jsonls", "pyright", "stylua", "fixjson", "ruff" },
+			ensure_installed = { "lua_ls", "jsonls", "pyright", "stylua", "fixjson", "prettier", "ruff" },
 			auto_update = false,
 			run_on_start = true,
 		})

@@ -7,7 +7,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				json = { "fixjson" },
-				jsonc = { "fixjson" },
+				jsonc = { "prettier" },
 				python = { "ruff_fix", "ruff_format" },
 			},
 			format_on_save = function(bufnr)
