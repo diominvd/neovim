@@ -6,6 +6,7 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 
 ## Table of Contents
 * [Features](#features)
+* [Languages](#languages)
 * [File Layout](#file-layout)
 * [Requirements](#requirements)
 * [Installation](#installation)
@@ -29,6 +30,32 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Gitsigns — git hunks, preview, blame.
 * Noice / Trouble / Todo-comments.
 * Semantic versioning with `:ConfigVersion` and `scripts/bump.sh`.
+
+## Languages
+
+Per-language tooling is configured centrally in `lua/config/languages.lua` —
+a single entry controls the LSP servers, formatters and treesitter parsers
+for a language. `lsp.nvim`, `mason.nvim`, `conform.nvim` and `treesitter.nvim`
+all read from this file, so there are no duplicated lists.
+
+```lua
+-- lua/config/languages.lua
+["TypeScript / React"] = {
+    enabled = true,                                   -- false = disable the whole language
+    ft = { "javascript", "typescript", "typescriptreact" }, -- filetypes for formatters
+    lsp = { "ts_ls" },                                -- LSP servers (enabled + auto-installed)
+    formatter = { "prettierd", "prettier" },          -- conform formatters (list or per-ft table)
+    parsers = { "javascript", "typescript", "tsx" },  -- treesitter parsers
+},
+```
+
+* **Adding a language** — add one entry and restart nvim: the LSP server and
+  parsers install automatically via mason / nvim-treesitter.
+* **Disabling a language** — set `enabled = false` to stop its servers from
+  starting and its formatter from running on save. Installed binaries are not
+  deleted from disk.
+
+Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
 
 ## File Layout
 
