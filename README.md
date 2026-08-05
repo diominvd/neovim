@@ -27,7 +27,7 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Flash — motion with labels.
 * Conform — format on save (StyLua, Ruff, fixjson, prettierd).
 * Gitsigns — git hunks, preview, blame.
-* Noice / Trouble / Which-key / Todo-comments.
+* Noice / Trouble / Todo-comments.
 * Semantic versioning with `:ConfigVersion` and `scripts/bump.sh`.
 
 ## File Layout
@@ -85,13 +85,24 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 ## Installation
 
 ```bash
-git clone https://github.com/diominvd/nvim.git ~/.config/nvim
+git clone https://github.com/diominvd/neovim.git ~/.config/nvim
 nvim --headless "+Lazy! sync" +qa
 ```
 
 ## Keybindings
 
 Leader is `<Space>`.
+
+### General
+
+| Key | Action |
+| --- | --- |
+| `jk` / `kj` | Exit insert mode |
+| `<leader>w` | Save buffer |
+| `<leader>wq` | Save all and exit |
+| `<leader>qq` | Exit without saving |
+| `<leader>d` | Delete to black hole |
+| `<leader>y` | Yank line |
 
 ### Find (Telescope)
 
@@ -115,11 +126,20 @@ Leader is `<Space>`.
 | `<S-p>` | Pin buffer |
 | `<A-h>` / `<A-l>` | Move buffer left / right |
 
+### Editing
+
+| Key | Action |
+| --- | --- |
+| `<` / `>` (visual) | Indent left / right |
+| `J` / `K` (visual) | Move selection down / up |
+| `---` (insert) | Insert em-dash |
+
 ### Windows
 
 | Key | Action |
 | --- | --- |
 | `<C-h/j/k/l>` | Navigate windows |
+| `<C-q>` | Close window |
 | `<leader>sv` / `<leader>sh` | Vertical / horizontal split |
 
 ### LSP
@@ -128,7 +148,7 @@ Leader is `<Space>`.
 | --- | --- |
 | `gd` | Go to definition |
 | `gr` | Find references |
-| `K` | Hover |
+| `K` | Hover + diagnostics |
 | `<C-k>` | Signature help (insert) |
 | `<leader>rn` | Rename |
 | `<leader>ca` | Code action |
@@ -160,9 +180,9 @@ Leader is `<Space>`.
 | `<leader>fmt` | Format buffer |
 | `<leader>xx` | Diagnostics (Trouble) |
 | `<leader>xb` | Buffer diagnostics (Trouble) |
+| `<leader>xq` | Quickfix list (Trouble) |
 | `<leader>mp` | Toggle markdown render |
 | `<leader>Q` | Delete session and quit |
-| `<leader>r` | Reload config |
 
 See `lua/config/keymaps.lua` for the full list.
 
