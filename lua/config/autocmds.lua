@@ -8,16 +8,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	end,
 })
 
--- Display errors on hover
+-- Display diagnostics and LSP hover in a single window
 vim.api.nvim_create_autocmd("CursorHold", {
 	callback = function()
-		vim.diagnostic.open_float(nil, {
-			focusable = false,
-			close_events = { "CursorMoved", "CursorMovedI", "BufLeave" },
-			border = "single",
-			source = "always",
-			prefix = " ",
-			scope = "cursor",
-		})
+		require("utils.hover").combined_hover({ focusable = false })
 	end,
 })

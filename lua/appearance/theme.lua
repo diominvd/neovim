@@ -19,6 +19,7 @@ return {
 
 			hi("NormalFloat", { bg = "NONE" })
 			hi("FloatBorder", { bg = "NONE", fg = "#a89984" })
+			hi("UtilsHoverHeader", { fg = vim.api.nvim_get_hl(0, { name = "Comment" }).fg, bold = true })
 			hi("Pmenu", { bg = "NONE" })
 			hi("PmenuSel", { bg = "#3c3836" })
 			hi("PmenuBorder", { bg = "NONE", fg = "#a89984" })
