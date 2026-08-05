@@ -10,12 +10,13 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Keybindings](#keybindings)
+* [Versioning](#versioning)
 * [Troubleshooting](#troubleshooting)
 
 ## Features
 
 * lazy.nvim — lazy-loading, optimised startup.
-* LSP via mason.nvim + nvim-lspconfig (Lua, Python, JSON).
+* LSP via mason.nvim + nvim-lspconfig (Lua, Python, JSON, TypeScript/React, CSS, HTML).
 * Blink.cmp — autocompletion.
 * Telescope — fuzzy finder (files, grep, buffers).
 * Treesitter — syntax highlighting, text objects.
@@ -24,9 +25,10 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Lualine — status line.
 * Auto-sessions — restore editor state on restart.
 * Flash — motion with labels.
-* Conform — format on save (StyLua, Ruff, fixjson).
+* Conform — format on save (StyLua, Ruff, fixjson, prettierd).
 * Gitsigns — git hunks, preview, blame.
 * Noice / Trouble / Which-key / Todo-comments.
+* Semantic versioning with `:ConfigVersion` and `scripts/bump.sh`.
 
 ## File Layout
 
@@ -34,10 +36,16 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 ~/.config/nvim/
 ├── init.lua
 ├── lazy-lock.json
+├── CHANGELOG.md
+├── scripts/
+│   └── bump.sh
 └── lua/
     ├── config/
     │   ├── options.lua
     │   ├── keymaps.lua
+    │   ├── commands.lua
+    │   ├── languages.lua
+    │   ├── version.lua
     │   ├── lazy.lua
     │   └── autocmds.lua
     ├── plugins/
@@ -58,7 +66,10 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
     │   ├── which-key.lua
     │   ├── todo-comments.lua
     │   ├── render-markdown.lua
+    │   ├── comment.lua
     │   └── autopairs.lua
+    ├── utils/
+    │   └── hover.lua
     └── appearance/
         └── theme.lua
 ```
@@ -154,6 +165,21 @@ Leader is `<Space>`.
 | `<leader>r` | Reload config |
 
 See `lua/config/keymaps.lua` for the full list.
+
+## Versioning
+
+The config follows [Semantic Versioning](https://semver.org/). The current
+version lives in `lua/config/version.lua` and is shown with `:ConfigVersion`.
+
+### Releasing a new version
+
+1. Add a short summary of your changes under `## [Unreleased]` in `CHANGELOG.md`.
+2. Run `./scripts/bump.sh patch` (or `minor` / `major`).
+3. Push with `git push && git push --tags`.
+
+The script moves the `[Unreleased]` entries into a dated release section,
+bumps the version and creates an annotated `vX.Y.Z` tag — the tag is the
+thing to link in a channel post about the update.
 
 ## Troubleshooting
 
