@@ -55,6 +55,6 @@ return {
 			end,
 		})
 
-		vim.lsp.enable({ "lua_ls", "jsonls", "pyright", "ruff", "ts_ls", "cssls", "html" })
+		vim.lsp.enable(require("config.languages").lsp_servers())
 	end,
 }

@@ -21,7 +21,7 @@ return {
 		})
 
 		require("mason-tool-installer").setup({
-			ensure_installed = { "lua_ls", "jsonls", "pyright", "ts_ls", "css-lsp", "html-lsp", "stylua", "fixjson", "prettier", "prettierd", "ruff" },
+			ensure_installed = require("config.languages").tools(),
 			auto_update = false,
 			run_on_start = true,
 		})
