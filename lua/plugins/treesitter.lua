@@ -6,7 +6,7 @@ return {
 	},
 	config = function()
 		require("nvim-treesitter").setup({
-			ensure_installed = { "python", "lua", "bash", "javascript", "typescript", "c" },
+			ensure_installed = { "python", "lua", "bash", "javascript", "typescript", "tsx", "css", "html", "c" },
 			highlight = { enable = true },
 			textobjects = {
 				select = {
