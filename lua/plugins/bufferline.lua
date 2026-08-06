@@ -4,6 +4,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	lazy = false,
 	config = function()
+		local p = require("config.palette")
 		require("bufferline").setup({
 			options = {
 				mode = "buffers",
@@ -23,17 +24,17 @@ return {
 			},
 			highlights = {
 				-- Inactive elements:
-				background = { bg = "#282828" },
-				buffer_visible = { bg = "#282828" },
-				separator = { bg = "#282828" },
-				separator_visible = { bg = "#282828" },
-				indicator_visible = { bg = "#282828" },
-				modified = { bg = "#282828" },
+				background = { bg = p.bg0 },
+				buffer_visible = { bg = p.bg0 },
+				separator = { bg = p.bg0 },
+				separator_visible = { bg = p.bg0 },
+				indicator_visible = { bg = p.bg0 },
+				modified = { bg = p.bg0 },
 				-- Active elements:
-				buffer_selected = { bg = "#45403d" },
-				separator_selected = { bg = "#45403d" },
-				indicator_selected = { bg = "#45403d" },
-				modified_selected = { bg = "#45403d" },
+				buffer_selected = { bg = p.bg3 },
+				separator_selected = { bg = p.bg3 },
+				indicator_selected = { bg = p.bg3 },
+				modified_selected = { bg = p.bg3 },
 			},
 		})
 	end,
