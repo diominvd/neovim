@@ -2,11 +2,15 @@ local M = {}
 
 local HEADER_NS = vim.api.nvim_create_namespace("utils.hover.headers")
 
+-- Remember the last non-focusable preview so a repeated CursorHold on the
+-- same line does not re-fire an LSP request while the window is still open.
+local last = { buf = nil, line = nil, win = nil }
+
 local function preview(lines, header_lines, focusable)
 	if #lines == 0 then
 		return
 	end
-	local bufnr = vim.lsp.util.open_floating_preview(lines, "markdown", {
+	local winid, bufnr = vim.lsp.util.open_floating_preview(lines, "markdown", {
 		border = "single",
 		focusable = focusable,
 		focus_id = "textDocument/hover",
@@ -17,6 +21,9 @@ local function preview(lines, header_lines, focusable)
 			end_col = #lines[lnum + 1],
 			hl_group = "UtilsHoverHeader",
 		})
+	end
+	if not focusable then
+		last = { buf = vim.api.nvim_get_current_buf(), line = vim.api.nvim_win_get_cursor(0)[1] - 1, win = winid }
 	end
 end
 
@@ -44,6 +51,12 @@ function M.combined_hover(opts)
 
 	local buf = vim.api.nvim_get_current_buf()
 	local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+
+	if not focusable then
+		if last.buf == buf and last.line == lnum and last.win and vim.api.nvim_win_is_valid(last.win) then
+			return
+		end
+	end
 
 	local diag_lines = {}
 	for _, diag in ipairs(vim.diagnostic.get(buf, { lnum = lnum })) do
