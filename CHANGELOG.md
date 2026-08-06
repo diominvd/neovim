@@ -29,6 +29,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   directly against `nvim-treesitter-textobjects`, and missing parsers are installed
   from `languages.lua` on startup.
 - Replaced deprecated `vim.tbl_islist` with `vim.islist` in `languages.lua`.
+- Hover window no longer raises errors on every `CursorHold`: `open_floating_preview`
+  returns `(bufnr, winid)` (not `(winid, bufnr)`) on this nvim version, which made
+  the header extmark target the window id and the debounce guard check a buffer id
+  as if it were a window.
+- Prose wrapping autocmd sets `wrap` / `linebreak` / `breakindent` as window-local
+  options on the buffer's windows (`vim.wo`) instead of `vim.bo`, which raised
+  `'buf' cannot be passed for window-local option 'wrap'` on nvim 0.12.
 
 ### Changed
 

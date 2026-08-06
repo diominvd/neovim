@@ -10,17 +10,19 @@ local function preview(lines, header_lines, focusable)
 	if #lines == 0 then
 		return
 	end
-	local winid, bufnr = vim.lsp.util.open_floating_preview(lines, "markdown", {
+	local bufnr, winid = vim.lsp.util.open_floating_preview(lines, "markdown", {
 		border = "single",
 		focusable = focusable,
 		focus_id = "textDocument/hover",
 		close_events = { "CursorMoved", "CursorMovedI", "BufLeave", "InsertEnter" },
 	})
-	for _, lnum in ipairs(header_lines) do
-		vim.api.nvim_buf_set_extmark(bufnr, HEADER_NS, lnum, 0, {
-			end_col = #lines[lnum + 1],
-			hl_group = "UtilsHoverHeader",
-		})
+	if vim.api.nvim_buf_is_valid(bufnr) then
+		for _, lnum in ipairs(header_lines) do
+			vim.api.nvim_buf_set_extmark(bufnr, HEADER_NS, lnum, 0, {
+				end_col = #lines[lnum + 1],
+				hl_group = "UtilsHoverHeader",
+			})
+		end
 	end
 	if not focusable then
 		last = { buf = vim.api.nvim_get_current_buf(), line = vim.api.nvim_win_get_cursor(0)[1] - 1, win = winid }

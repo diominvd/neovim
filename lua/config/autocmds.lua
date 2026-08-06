@@ -16,14 +16,17 @@ vim.api.nvim_create_autocmd("CursorHold", {
 })
 
 -- Enable wrapping only for prose filetypes
+-- (wrap/linebreak/breakindent are window-local: set them on the buffer's windows)
 local wrap_filetypes = { "markdown", "text", "tex", "rst" }
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(args)
 		local ft = vim.bo[args.buf].filetype
-		if vim.tbl_contains(wrap_filetypes, ft) then
-			vim.bo[args.buf].wrap = true
-			vim.bo[args.buf].linebreak = true
-			vim.bo[args.buf].breakindent = true
+		if vim.list_contains(wrap_filetypes, ft) then
+			for _, win in ipairs(vim.fn.win_findbuf(args.buf)) do
+				vim.wo[win].wrap = true
+				vim.wo[win].linebreak = true
+				vim.wo[win].breakindent = true
+			end
 		end
 	end,
 })
@@ -33,7 +36,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function()
 		local ft = vim.bo.filetype
-		if vim.bo.binary or vim.tbl_contains(wrap_filetypes, ft) then
+		if vim.bo.binary or vim.list_contains(wrap_filetypes, ft) then
 			return
 		end
 		local view = vim.fn.winsaveview()
