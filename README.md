@@ -14,9 +14,12 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * [Versioning](#versioning)
 * [Troubleshooting](#troubleshooting)
 
+> Full keybinding documentation: [`KEYBINDINGS.md`](KEYBINDINGS.md).
+
 ## Features
 
 * lazy.nvim — lazy-loading, optimised startup.
+* Which-key — discoverable leader bindings.
 * LSP via mason.nvim + nvim-lspconfig (Lua, Python, JSON, TypeScript/React, CSS, HTML).
 * Blink.cmp — autocompletion.
 * Telescope — fuzzy finder (files, grep, buffers).
@@ -29,6 +32,8 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Conform — format on save (StyLua, Ruff, fixjson, prettierd).
 * Gitsigns — git hunks, preview, blame.
 * Noice / Trouble / Todo-comments.
+* Auto cleanup — trailing whitespace stripped on save (skips prose and binaries).
+* Soft wrapping only for prose filetypes (markdown, text, tex, rst).
 * Semantic versioning with `:ConfigVersion` and `scripts/bump.sh`.
 
 ## Languages
@@ -64,6 +69,7 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
 ├── init.lua
 ├── lazy-lock.json
 ├── CHANGELOG.md
+├── KEYBINDINGS.md
 ├── scripts/
 │   └── bump.sh
 └── lua/
@@ -72,6 +78,7 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
     │   ├── keymaps.lua
     │   ├── commands.lua
     │   ├── languages.lua
+    │   ├── palette.lua
     │   ├── version.lua
     │   ├── lazy.lua
     │   └── autocmds.lua
@@ -118,100 +125,30 @@ nvim --headless "+Lazy! sync" +qa
 
 ## Keybindings
 
-Leader is `<Space>`.
+Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
+(which-key). The complete, up-to-date reference is in
+[`KEYBINDINGS.md`](KEYBINDINGS.md).
 
-### General
+### Leader groups (which-key)
+
+| Prefix | Group |
+| --- | --- |
+| `<Space>f` | Find (Telescope) |
+| `<Space>g` | Git |
+| `<Space>s` | Split |
+| `<Space>x` | Diagnostics / Trouble |
+
+### Most used
 
 | Key | Action |
 | --- | --- |
-| `jk` / `kj` | Exit insert mode |
-| `<leader>w` | Save buffer |
-| `<leader>wq` | Save all and exit |
-| `<leader>qq` | Exit without saving |
-| `<leader>d` | Delete to black hole |
-| `<leader>y` | Yank line |
-
-### Find (Telescope)
-
-| Key | Action |
-| --- | --- |
+| `<leader>w` / `<leader>W` | Save / save all and exit |
 | `<leader>ff` | Find files |
-| `<leader>fg` | Live grep |
-| `<leader>fw` | Grep word under cursor |
-| `<leader>fb` | Buffers |
-| `<leader>fo` | Recent files |
-| `<leader>fh` | Help tags |
-| `<leader>ft` | Find TODOs |
-| `<leader>fk` | Show keymaps |
-
-### Buffers
-
-| Key | Action |
-| --- | --- |
+| `gd` / `gr` | Go to definition / references |
+| `]d` / `[d` | Next / previous diagnostic |
 | `<S-h>` / `<S-l>` | Previous / next buffer |
-| `<S-x>` | Close buffer (smart) |
-| `<S-p>` | Pin buffer |
-| `<A-h>` / `<A-l>` | Move buffer left / right |
-
-### Editing
-
-| Key | Action |
-| --- | --- |
-| `<` / `>` (visual) | Indent left / right |
-| `J` / `K` (visual) | Move selection down / up |
-| `---` (insert) | Insert em-dash |
-
-### Windows
-
-| Key | Action |
-| --- | --- |
-| `<C-h/j/k/l>` | Navigate windows |
-| `<C-q>` | Close window |
-| `<leader>sv` / `<leader>sh` | Vertical / horizontal split |
-
-### LSP
-
-| Key | Action |
-| --- | --- |
-| `gd` | Go to definition |
-| `gr` | Find references |
-| `K` | Hover + diagnostics |
-| `<C-k>` | Signature help (insert) |
-| `<leader>rn` | Rename |
-| `<leader>ca` | Code action |
-
-### Git
-
-| Key | Action |
-| --- | --- |
-| `]h` / `[h` | Next / previous hunk |
-| `<leader>gp` | Preview hunk |
-| `<leader>gb` | Blame line |
-
-### Treesitter Textobjects
-
-| Key | Action |
-| --- | --- |
-| `af` / `if` | Function (outer / inner) |
-| `ac` / `ic` | Class (outer / inner) |
-| `aa` / `ia` | Parameter (outer / inner) |
-| `]f` / `[f` | Next / previous function |
-| `]]` / `[[` | Next / previous class |
-
-### Other
-
-| Key | Action |
-| --- | --- |
 | `s` / `S` | Flash jump / treesitter |
 | `<leader>e` | Toggle file explorer |
-| `<leader>fmt` | Format buffer |
-| `<leader>xx` | Diagnostics (Trouble) |
-| `<leader>xb` | Buffer diagnostics (Trouble) |
-| `<leader>xq` | Quickfix list (Trouble) |
-| `<leader>mp` | Toggle markdown render |
-| `<leader>Q` | Delete session and quit |
-
-See `lua/config/keymaps.lua` for the full list.
 
 ## Versioning
 
