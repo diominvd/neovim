@@ -21,7 +21,7 @@ map("v", "jk", "<ESC>", "Exit from visual mode")
 map("v", "kj", "<ESC>", "Exit from visual mode")
 
 map("n", "<leader>w", ":w<CR>", "Save buffer")
-map("n", "<leader>wq", ":wqa<CR>", "Save all and exit")
+map("n", "<leader>W", ":wqa<CR>", "Save all and exit")
 map("n", "<leader>qq", ":qa!<CR>", "Exit without saving")
 
 map({ "n", "v" }, "<leader>d", '"_d', "Delete to black hole")
@@ -68,6 +68,20 @@ map("n", "<leader>fh", ":Telescope help_tags<CR>", "Help tags")
 map("n", "<leader>fw", ":Telescope grep_string<CR>", "Find word")
 map("n", "<leader>fo", ":Telescope oldfiles<CR>", "Recent files")
 map("n", "<leader>fk", ":Telescope keymaps<CR>", "Keymaps")
+map("n", "<leader>fs", ":SessionSearch<CR>", "Session search")
+
+map("n", "<leader>gc", ":Telescope git_commits<CR>", "Git commits")
+map("n", "<leader>gs", ":Telescope git_status<CR>", "Git status")
+map("n", "<leader>gl", ":Telescope git_branches<CR>", "Git branches")
+
+map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+map("n", "[d", vim.diagnostic.goto_prev, "Prev diagnostic")
+map("n", "]e", function()
+	vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+end, "Next error")
+map("n", "[e", function()
+	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end, "Prev error")
 
 ---------- Diagnostics ----------
 map("n", "<leader>fmt", function()
