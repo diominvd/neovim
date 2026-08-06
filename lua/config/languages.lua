@@ -41,7 +41,7 @@ local languages = {
 			json = { "fixjson" },
 			jsonc = { "prettier" },
 		},
-		parsers = {},
+		parsers = { "json" },
 	},
 	["Lua"] = {
 		enabled = true,
@@ -70,6 +70,10 @@ local languages = {
 		parsers = { "c" },
 	},
 }
+
+-- Parsers needed regardless of the language list above: editing the config
+-- itself (vim/vimdoc), markdown (render-markdown) and helper parsers.
+local common_parsers = { "vim", "vimdoc", "markdown", "markdown_inline", "comment", "diff" }
 
 -- Below: derived lists consumed by mason / lspconfig / conform / treesitter.
 -- No need to touch anything here.
@@ -139,10 +143,11 @@ end
 
 function M.parsers()
 	local parsers = {}
+	vim.list_extend(parsers, common_parsers)
 	each_lang(function(lang)
 		vim.list_extend(parsers, lang.parsers or {})
 	end)
-	return parsers
+	return unique(parsers)
 end
 
 function M.tools()
