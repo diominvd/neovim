@@ -8,10 +8,11 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	end,
 })
 
--- Display diagnostics and LSP hover in a single window
+-- Display diagnostics and LSP hover in a single window.
+-- Auto-opens only when the cursor is on an error/warning line; <K> forces it anywhere.
 vim.api.nvim_create_autocmd("CursorHold", {
 	callback = function()
-		require("utils.hover").combined_hover({ focusable = false })
+		require("utils.hover").combined_hover({ focusable = false, only_on_diagnostic = true })
 	end,
 })
 

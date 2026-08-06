@@ -4,7 +4,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	lazy = false,
 	config = function()
-		local p = require("config.palette")
+		local p = require("appearance.palette")
 		require("bufferline").setup({
 			options = {
 				mode = "buffers",

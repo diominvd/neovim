@@ -34,6 +34,7 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Noice / Trouble / Todo-comments.
 * Auto cleanup — trailing whitespace stripped on save (skips prose and binaries).
 * Soft wrapping only for prose filetypes (markdown, text, tex, rst).
+* Diagnostics + LSP hover window auto-opens on `CursorHold` only over an error/warning line; `K` forces it anywhere.
 * Semantic versioning with `:ConfigVersion` and `scripts/bump.sh`.
 
 ## Languages
@@ -78,7 +79,6 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
     │   ├── keymaps.lua
     │   ├── commands.lua
     │   ├── languages.lua
-    │   ├── palette.lua
     │   ├── version.lua
     │   ├── lazy.lua
     │   └── autocmds.lua
@@ -105,7 +105,8 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
     ├── utils/
     │   └── hover.lua
     └── appearance/
-        └── theme.lua
+        ├── theme.lua
+        └── palette.lua
 ```
 
 ## Requirements

@@ -115,7 +115,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local bufnr = args.buf
 
 		map("n", "K", function()
-			require("utils.hover").combined_hover()
+			require("utils.hover").combined_hover({ focusable = true })
 		end, { buffer = bufnr, desc = "Hover + diagnostics" })
 		map("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP signature help" })
 		map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })

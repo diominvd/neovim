@@ -50,6 +50,9 @@ end
 
 function M.combined_hover(opts)
 	local focusable = (opts and opts.focusable ~= nil) and opts.focusable or true
+	-- Auto-triggered (CursorHold) opens only when the cursor is on a line that
+	-- has an error or warning; an explicit <K> call skips this gate.
+	local only_on_diagnostic = opts and opts.only_on_diagnostic or false
 
 	local buf = vim.api.nvim_get_current_buf()
 	local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
@@ -61,10 +64,19 @@ function M.combined_hover(opts)
 	end
 
 	local diag_lines = {}
+	local has_err_or_warn = false
 	for _, diag in ipairs(vim.diagnostic.get(buf, { lnum = lnum })) do
-		local severity = vim.lsp.protocol.DiagnosticSeverity[diag.severity] or "Error"
+		local sev = diag.severity
+		if sev == vim.diagnostic.severity.ERROR or sev == vim.diagnostic.severity.WARN then
+			has_err_or_warn = true
+		end
+		local severity = vim.lsp.protocol.DiagnosticSeverity[sev] or "Error"
 		local source = diag.source and (" " .. diag.source) or ""
 		table.insert(diag_lines, ("[%s%s] %s"):format(severity, source, diag.message))
+	end
+
+	if only_on_diagnostic and not has_err_or_warn then
+		return
 	end
 
 	local hover_client = nil

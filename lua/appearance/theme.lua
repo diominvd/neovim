@@ -2,7 +2,7 @@ return {
 	"sainnhe/gruvbox-material",
 	priority = 1000,
 	config = function()
-		local p = require("config.palette")
+		local p = require("appearance.palette")
 
 		-- Colors configuration
 		vim.g.gruvbox_material_better_performance = 1

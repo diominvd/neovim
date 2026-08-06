@@ -106,7 +106,7 @@ Active only while an LSP server is attached to the buffer.
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `K` | n | Hover + diagnostics combined window |
+| `K` | n | Hover + diagnostics combined window (opens anywhere, forces) |
 | `gd` | n | Go to definition |
 | `gr` | n | Find references |
 | `<Space>rn` | n | Rename symbol |

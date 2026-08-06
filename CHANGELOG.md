@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Line wrapping restricted to prose filetypes (markdown, text, tex, rst) instead of global.
 - Debounce guard for the `CursorHold` hover window (no repeated LSP requests while visible).
 - Full keybinding reference in `KEYBINDINGS.md`; README now links to it.
+- The `CursorHold` diagnostics/hover window auto-opens only when the cursor is on
+  an error or warning line; `K` still opens it forcibly anywhere.
 
 ### Fixed
 
@@ -42,6 +44,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Save all and exit` moved from `<leader>wq` to `<leader>W` to remove the 300ms
   timeout conflict with `<leader>w` (save).
 - Removed `hijack_netrw_behavior` from neo-tree (netrw is disabled).
+- Color palette moved from `lua/config/palette.lua` to `lua/appearance/palette.lua`;
+  the lazy.nvim import is now scoped to `appearance.theme` so the palette module
+  is not scanned as a plugin spec.
 
 ## [0.1.0] - 2026-08-06
 
