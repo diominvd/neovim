@@ -1,15 +1,21 @@
 return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
-	enabled = false,
 	config = function()
-		require("which-key").setup({
+		local wk = require("which-key")
+		wk.setup({
 			plugins = {
 				spelling = { enabled = false },
 			},
 			win = {
 				border = "single",
 			},
+		})
+		wk.add({
+			{ "<leader>f", group = "Find" },
+			{ "<leader>g", group = "Git" },
+			{ "<leader>s", group = "Split" },
+			{ "<leader>x", group = "Diagnostics" },
 		})
 	end,
 }
