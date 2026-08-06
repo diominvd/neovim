@@ -96,7 +96,7 @@ end
 
 local function flatten_formatters(lang)
 	local names = {}
-	if type(lang.formatter) == "table" and vim.tbl_islist(lang.formatter) then
+	if type(lang.formatter) == "table" and vim.islist(lang.formatter) then
 		vim.list_extend(names, lang.formatter)
 	elseif type(lang.formatter) == "table" then
 		for _, f in pairs(lang.formatter) do
@@ -128,7 +128,7 @@ end
 function M.formatters_by_ft()
 	local by_ft = {}
 	each_lang(function(lang)
-		if type(lang.formatter) == "table" and vim.tbl_islist(lang.formatter) then
+		if type(lang.formatter) == "table" and vim.islist(lang.formatter) then
 			for _, ft in ipairs(lang.ft or {}) do
 				by_ft[ft] = lang.formatter
 			end
