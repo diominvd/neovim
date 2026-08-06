@@ -13,7 +13,6 @@ return {
 			enable_git_status = true,
 			enable_diagnostics = true,
 			filesystem = {
-				hijack_netrw_behavior = "open_default",
 				follow_current_file = { enabled = true },
 				use_libuv_file_watcher = true,
 				filtered_items = {
