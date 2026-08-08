@@ -37,8 +37,11 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<Space>w` | n | Save buffer |
 | `<Space>W` | n | Save all buffers and exit |
 | `<Space>qq` | n | Quit without saving |
+| `<Space>hk` | n | Open this reference (`KEYBINDINGS.md`) |
 | `<Space>d` | n, v | Delete to the black-hole register (`"_d`) — nothing is lost from `"` |
-| `<Space>y` | n, v | Yank line (`yy`) |
+| `<Space>y` | n | Yank line (`yy`) |
+| `<Space>y` | v | Yank the selection |
+| `<Space>uF` | n | Toggle auto-format on save (conform) |
 | `<Space>fmt` | n | Format current buffer (conform, falls back to LSP) |
 | `<Space>e` | n | Toggle neo-tree file explorer |
 | `<Space>mp` | n | Toggle markdown rendering (render-markdown) |
@@ -95,6 +98,7 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `]h` | n | Next hunk (gitsigns) |
 | `[h` | n | Previous hunk (gitsigns) |
 | `<Space>gp` | n | Preview hunk (gitsigns) |
+| `<Space>gd` | n | Diff current file against HEAD (gitsigns) |
 | `<Space>gb` | n | Git blame for current line (gitsigns) |
 | `<Space>gc` | n | Browse git commits (Telescope) |
 | `<Space>gs` | n | Git status / changed files (Telescope) |
@@ -109,8 +113,12 @@ Active only while an LSP server is attached to the buffer.
 | `K` | n | Hover + diagnostics combined window (opens anywhere, forces) |
 | `gd` | n | Go to definition |
 | `gr` | n | Find references |
+| `gD` | n | Go to declaration |
+| `gy` | n | Go to type definition |
+| `gI` | n | Go to implementation |
 | `<Space>rn` | n | Rename symbol |
 | `<Space>ca` | n | Code action |
+| `<Space>ih` | n | Toggle inlay hints |
 | `<C-k>` | i | Signature help |
 
 ## Diagnostics
@@ -174,6 +182,32 @@ Move (next / previous):
 | --- | --- | --- |
 | `s` | n, x, o | Flash jump (label-based motion) |
 | `S` | n, x, o | Flash treesitter (jump to treesitter nodes) |
+
+## Undo
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<Space>uu` | n | Open the undo tree (visual history of all changes) |
+
+## Surround (mini.surround)
+
+Work on surrounding characters (quotes, brackets, tags, words).
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `gsa` | n, v | Add surrounding — e.g. `gsaiw"` wraps the word in `"` |
+| `gsd` | n, v | Delete surrounding — `gsd"` turns `"foo"` into `foo` |
+| `gsr` | n, v | Replace surrounding — `gsr"` then `'` turns `"foo"` into `'foo'` |
+| `gsf` | n | Find the surrounding to the right |
+| `gsF` | n | Find the surrounding to the left |
+| `gsh` | n, v | Highlight the current surrounding |
+| `gsn` | n | Set the number of lines for the search (`updaten_lines`) |
+
+Examples:
+* `gsaiw"` — wrap the word under the cursor in `"`.
+* `gsd'` — strip the surrounding `'` from `'foo'`.
+* `gsr[` then `(` — change `[foo]` into `(foo)`.
+* In visual mode select text and press `gsa` + a character to wrap the selection.
 
 ## File Explorer (Neo-tree window)
 

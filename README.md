@@ -30,11 +30,16 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Auto-sessions — restore editor state on restart.
 * Flash — motion with labels.
 * Conform — format on save (StyLua, Ruff, fixjson, prettierd).
-* Gitsigns — git hunks, preview, blame.
+* Gitsigns — git hunks, diff, preview, blame.
+* Undotree — visual history of changes (`<Space>uu`).
+* Mini.surround — surround editing (`gsa` / `gsd` / `gsr`).
+* Snacks (indent + scroll) — indent guides and a scrollbar, nothing else enabled.
 * Noice / Trouble / Todo-comments.
-* Auto cleanup — trailing whitespace stripped on save (skips prose and binaries).
+* Smart search — `ignorecase` + `smartcase`, live `:s` preview.
+* Visible trailing whitespace and tabs (stripped on save, skips prose and binaries).
 * Soft wrapping only for prose filetypes (markdown, text, tex, rst).
 * Diagnostics + LSP hover window auto-opens on `CursorHold` only over an error/warning line; `K` forces it anywhere.
+* Inlay hints toggle per buffer (`<Space>ih`).
 * Semantic versioning with `:ConfigVersion` and `scripts/bump.sh`.
 
 ## Languages
@@ -101,7 +106,10 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
     │   ├── todo-comments.lua
     │   ├── render-markdown.lua
     │   ├── comment.lua
-    │   └── autopairs.lua
+    │   ├── autopairs.lua
+    │   ├── surround.lua
+    │   ├── undotree.lua
+    │   └── snacks.lua
     ├── utils/
     │   └── hover.lua
     └── appearance/
@@ -149,6 +157,8 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 | `]d` / `[d` | Next / previous diagnostic |
 | `<S-h>` / `<S-l>` | Previous / next buffer |
 | `s` / `S` | Flash jump / treesitter |
+| `gsa` / `gsd` / `gsr` | Add / delete / replace surrounding |
+| `<leader>uu` | Undo tree |
 | `<leader>e` | Toggle file explorer |
 
 ## Versioning

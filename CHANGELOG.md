@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Smart search: `ignorecase` + `smartcase` (case-insensitive unless the query has capitals) and live `:s` preview via `inccommand`.
+- Visible trailing whitespace and tabs (`list` + `listchars`) — complements the on-save cleanup.
+- `showmode` disabled — the mode is already shown by lualine.
+- Format-on-save toggle `<leader>uF` (guarded by the existing `disable_autoformat` flag).
+- `<leader>hk` opens the keybinding reference (`KEYBINDINGS.md`).
+- LSP navigation: `gD` (declaration), `gy` (type definition), `gI` (implementation) and per-buffer inlay-hint toggle `<leader>ih`.
+- Gitsigns `<leader>gd` — diff the current file against HEAD (`diffthis`).
+- mini.surround — surround editing with the `gs*` prefix (`gsa` / `gsd` / `gsr` / `gsf` / `gsF` / `gsh`); `s`-prefix avoided because it conflicts with flash.
+- undotree — visual history of changes via `<leader>uu`.
+- Snacks (`folke/snacks.nvim`) with only the `indent` (indent guides) and `scroll`
+  (scrollbar) modules enabled; the rest of snacks stays off.
+- Telescope `file_ignore_patterns` for build artifacts (`node_modules`, `dist`, `target`, `build`, `__pycache__`, `.venv`, `.next`, etc.).
+
+### Changed
+
+- Bufferline loads on `UIEnter` and neo-tree on the `Neotree` command instead of at startup — faster startup.
+- `<leader>y` in visual mode yanks the selection, not the whole line.
+- Which-key popup is now a compact box: no `<esc>`/`<bs>` hints, per-row icons or section-title frame, less padding.
+- `.luarc.json` points `workspace.library` at the config and lazy install dirs (no more spurious lint on `require("lazy")` and friends).
+
+### Removed
+
+- Redundant neo-tree `neo_tree_buffer_enter` handler (relative numbers are already global).
+
+### Fixed
+
+- Telescope results no longer shift horizontally when navigating: `entry_prefix`
+  now matches the 1-column `selection_caret`, so selected and unselected rows
+  share the same text column.
+- Which-key popup opens at the left edge of the current window instead of the
+  whole editor, so it no longer overlaps the neo-tree file explorer.
+
 ## [0.2.0] - 2026-08-07
 
 ### Added
