@@ -1,12 +1,16 @@
 local opt = vim.opt
 local g = vim.g
 
--- General settings
+-- General Settings
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 opt.clipboard = "unnamedplus"
+opt.ignorecase = true
+opt.smartcase = true
+opt.inccommand = "split"
+opt.showmode = false
 
--- Interface options
+-- Interface Options
 opt.termguicolors = true
 opt.number = true
 opt.relativenumber = true
@@ -20,7 +24,11 @@ opt.linebreak = true
 opt.breakindent = true
 opt.colorcolumn = "80"
 
--- Indentation settings
+-- Visualize trailing whitespace and tabs (hidden by default).
+opt.list = true
+opt.listchars = { trail = "·", tab = "» " }
+
+-- Indentation Settings
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
@@ -29,7 +37,7 @@ opt.expandtab = true
 opt.splitright = true
 opt.splitbelow = true
 
--- File handling
+-- File Handling
 opt.swapfile = false
 opt.backup = false
 opt.undofile = true
