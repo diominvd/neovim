@@ -1,4 +1,4 @@
--- Custom mapping function
+-- Custom Mapping Function
 local function map(mode, lhs, rhs, opts)
 	local options = { noremap = true, silent = true }
 	if opts then
@@ -23,9 +23,13 @@ map("v", "kj", "<ESC>", "Exit from visual mode")
 map("n", "<leader>w", ":w<CR>", "Save buffer")
 map("n", "<leader>W", ":wqa<CR>", "Save all and exit")
 map("n", "<leader>qq", ":qa!<CR>", "Exit without saving")
+map("n", "<leader>hk", function()
+	vim.cmd.edit(vim.fn.fnameescape(vim.fn.stdpath("config") .. "/KEYBINDINGS.md"))
+end, "Open keybinding reference")
 
 map({ "n", "v" }, "<leader>d", '"_d', "Delete to black hole")
-map({ "n", "v" }, "<leader>y", "yy", "Yank line")
+map("n", "<leader>y", "yy", "Yank line")
+map("v", "<leader>y", "y", "Yank selection")
 
 ---------- Windows ----------
 map("n", "<C-h>", "<C-w>h", "Window left")
@@ -70,10 +74,12 @@ map("n", "<leader>fo", ":Telescope oldfiles<CR>", "Recent files")
 map("n", "<leader>fk", ":Telescope keymaps<CR>", "Keymaps")
 map("n", "<leader>fs", ":SessionSearch<CR>", "Session search")
 
+---------- Git ----------
 map("n", "<leader>gc", ":Telescope git_commits<CR>", "Git commits")
 map("n", "<leader>gs", ":Telescope git_status<CR>", "Git status")
 map("n", "<leader>gl", ":Telescope git_branches<CR>", "Git branches")
 
+---------- Diagnostics ----------
 map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
 map("n", "[d", vim.diagnostic.goto_prev, "Prev diagnostic")
 map("n", "]e", function()
@@ -83,7 +89,7 @@ map("n", "[e", function()
 	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
 end, "Prev error")
 
----------- Diagnostics ----------
+---------- Formatting ----------
 map("n", "<leader>fmt", function()
 	require("conform").format({
 		lsp_fallback = true,
@@ -91,6 +97,14 @@ map("n", "<leader>fmt", function()
 		timeout_ms = 500,
 	})
 end, "Format buffer")
+map("n", "<leader>uF", function()
+	vim.g.disable_autoformat = not vim.g.disable_autoformat
+	if vim.g.disable_autoformat then
+		vim.notify("Auto-format on save disabled", vim.log.levels.WARN)
+	else
+		vim.notify("Auto-format on save enabled", vim.log.levels.INFO)
+	end
+end, "Toggle format on save")
 
 ---------- Plugins ----------
 map({ "n", "x", "o" }, "s", function()
@@ -120,7 +134,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP signature help" })
 		map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
 		map("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Find references" })
+		map("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Go to declaration" })
+		map("n", "gy", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Go to type definition" })
+		map("n", "gI", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to implementation" })
 		map("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename symbol" })
 		map("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code action" })
+		map("n", "<leader>ih", function()
+			local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+			vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+		end, { buffer = bufnr, desc = "Toggle inlay hints" })
 	end,
 })
