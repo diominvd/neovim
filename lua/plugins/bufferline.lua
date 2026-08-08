@@ -2,7 +2,7 @@ return {
 	"akinsho/bufferline.nvim",
 	version = "*",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	lazy = false,
+	event = "UIEnter",
 	config = function()
 		local p = require("appearance.palette")
 		require("bufferline").setup({
@@ -23,14 +23,14 @@ return {
 				},
 			},
 			highlights = {
-				-- Inactive elements:
+				-- Inactive Elements:
 				background = { bg = p.bg0 },
 				buffer_visible = { bg = p.bg0 },
 				separator = { bg = p.bg0 },
 				separator_visible = { bg = p.bg0 },
 				indicator_visible = { bg = p.bg0 },
 				modified = { bg = p.bg0 },
-				-- Active elements:
+				-- Active Elements:
 				buffer_selected = { bg = p.bg3 },
 				separator_selected = { bg = p.bg3 },
 				indicator_selected = { bg = p.bg3 },

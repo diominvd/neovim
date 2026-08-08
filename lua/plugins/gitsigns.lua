@@ -17,6 +17,7 @@ return {
 				map("n", "]h", gs.next_hunk, "Next hunk")
 				map("n", "[h", gs.prev_hunk, "Prev hunk")
 				map("n", "<leader>gp", gs.preview_hunk, "Preview hunk")
+				map("n", "<leader>gd", gs.diffthis, "Diff current file")
 				map("n", "<leader>gb", gs.blame_line, "Blame line")
 			end,
 		})

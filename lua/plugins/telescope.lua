@@ -11,7 +11,21 @@ return {
 				borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 				prompt_prefix = " ",
 				selection_caret = " ",
+				entry_prefix = " ",
 				path_display = { "truncate" },
+				file_ignore_patterns = {
+					"node_modules/",
+					"%.git/",
+					"%.venv/",
+					"venv/",
+					"dist/",
+					"target/",
+					"build/",
+					"__pycache__/",
+					"%.next/",
+					"%.idea/",
+					"%.vscode/",
+				},
 				sorting_strategy = "ascending",
 				layout_config = {
 					horizontal = {

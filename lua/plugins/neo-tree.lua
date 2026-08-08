@@ -6,7 +6,7 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
 	},
-	lazy = false,
+	cmd = { "Neotree" },
 	config = function()
 		require("neo-tree").setup({
 			close_if_last_window = true,
@@ -37,14 +37,6 @@ return {
 			default_component_configs = {
 				icon = {
 					highlight = "NeoTreeFileIcon",
-				},
-			},
-			event_handlers = {
-				{
-					event = "neo_tree_buffer_enter",
-					handler = function()
-						vim.opt_local.relativenumber = true
-					end,
 				},
 			},
 		})
