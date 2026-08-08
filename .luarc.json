@@ -1,5 +1,8 @@
 {
   "diagnostics": {
     "globals": ["vim"]
+  },
+  "workspace": {
+    "library": ["~/.config/nvim", "~/.local/share/nvim/lazy"]
   }
 }
