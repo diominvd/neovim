@@ -16,6 +16,13 @@ vim.api.nvim_create_autocmd("CursorHold", {
 	end,
 })
 
+-- Briefly highlight the yanked region.
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 })
+	end,
+})
+
 -- Enable wrapping only for prose filetypes
 -- (wrap/linebreak/breakindent are window-local: set them on the buffer's windows)
 local wrap_filetypes = { "markdown", "text", "tex", "rst" }

@@ -28,6 +28,7 @@ map("n", "<leader>hk", function()
 	local config_root = vim.fn.fnamemodify(source, ":h:h:h")
 	vim.cmd.edit(vim.fn.fnameescape(config_root .. "/KEYBINDINGS.md"))
 end, "Open keybinding reference")
+map("n", "<leader>hh", ":noh<CR>", "Clear search highlight")
 
 map({ "n", "v" }, "<leader>d", '"_d', "Delete to black hole")
 map("n", "<leader>y", "yy", "Yank line")
