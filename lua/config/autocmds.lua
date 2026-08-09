@@ -23,6 +23,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- Treesitter-based folding for buffers that have a parser.
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function(args)
+		if not vim.treesitter.language.add(vim.bo[args.buf].filetype) then
+			return
+		end
+		vim.opt_local.foldmethod = "expr"
+		vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		vim.opt_local.foldlevel = 99
+		vim.opt_local.foldlevelstart = 99
+	end,
+})
+
 -- Enable wrapping only for prose filetypes
 -- (wrap/linebreak/breakindent are window-local: set them on the buffer's windows)
 local wrap_filetypes = { "markdown", "text", "tex", "rst" }
