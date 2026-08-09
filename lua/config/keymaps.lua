@@ -118,8 +118,24 @@ map({ "n", "x", "o" }, "S", function()
 end, "Flash treesitter")
 
 ---------- Terminal ----------
+local function main_editor_win()
+	for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+		local config = vim.api.nvim_win_get_config(win)
+		local ft = vim.bo[vim.api.nvim_win_get_buf(win)].filetype
+		if config.relative == "" and not vim.tbl_contains({ "neo-tree", "snacks_terminal", "qf" }, ft) then
+			return win
+		end
+	end
+	return vim.api.nvim_get_current_win()
+end
+
 map("n", "<leader>t", function()
-	require("snacks").terminal.toggle(nil, { win = { position = "float" } })
+	require("snacks").terminal.toggle(nil, {
+		win = {
+			relative = "win",
+			win = main_editor_win(),
+		},
+	})
 end, "Toggle terminal")
 map("n", "<leader>gg", function()
 	if vim.fn.executable("lazygit") == 1 then
