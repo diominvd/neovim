@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Terminal: snacks `terminal` module with `<leader>t` (floating terminal toggle).
+- `<leader>gg` — lazygit (guarded: notifies if `lazygit` is missing; activates once installed).
+- `<leader>hh` — clear search highlight (native `<C-l>` is taken by window navigation).
+- Treesitter-based folding (`foldmethod=expr`) for every buffer with a parser.
+- Yank highlight via `vim.highlight.on_yank`.
+- `telescope-ui-select` — Telescope now themes `vim.ui.select` (trouble, blink, etc.).
+- Extra which-key groups: `c` Code, `h` Help, `i` Inlay, `m` Markdown, `q` Quit/Session,
+  `r` Refactor, `t` Terminal, `u` Undo/Format.
+- Diagnostics float windows use a `single` border to match the rest of the UI.
+
+### Changed
+
+- Gitsigns is lazy-loaded on `BufReadPre` / `BufNewFile` instead of startup.
+- Class navigation moved from `]]` / `[[` to `]k` / `[k` to restore the native
+  section motions in C-like files.
+- Blink.cmp drops the deprecated `use_nvim_cmp_as_default` option (the theme already
+  defines the BlinkCmp highlight groups directly).
+
 ## [0.3.0] - 2026-08-09
 
 ### Added

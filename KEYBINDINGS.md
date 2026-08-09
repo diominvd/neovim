@@ -25,9 +25,17 @@ Pressing `<Space>` shows a popup with every group and mapping.
 
 | Prefix | Group |
 | --- | --- |
+| `<Space>c` | Code |
 | `<Space>f` | Find (Telescope) |
 | `<Space>g` | Git |
+| `<Space>h` | Help |
+| `<Space>i` | Inlay |
+| `<Space>m` | Markdown |
+| `<Space>q` | Quit / Session |
+| `<Space>r` | Refactor |
 | `<Space>s` | Split |
+| `<Space>t` | Terminal |
+| `<Space>u` | Undo / Format |
 | `<Space>x` | Diagnostics / Trouble |
 
 ## General
@@ -38,6 +46,7 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<Space>W` | n | Save all buffers and exit |
 | `<Space>qq` | n | Quit without saving |
 | `<Space>hk` | n | Open this reference (`KEYBINDINGS.md`) |
+| `<Space>hh` | n | Clear the search highlight (`:noh`) |
 | `<Space>d` | n, v | Delete to the black-hole register (`"_d`) — nothing is lost from `"` |
 | `<Space>y` | n | Yank line (`yy`) |
 | `<Space>y` | v | Yank the selection |
@@ -143,7 +152,6 @@ JSX-aware: `gc` on JSX elements uses `{/* */}`.
 ## Treesitter Text Objects
 
 Select (works as a motion — combine with operators):
-
 | Key | Mode | Object |
 | --- | --- | --- |
 | `af` / `if` | x, o | Function (outer / inner) |
@@ -162,7 +170,7 @@ Move (next / previous):
 | Key | Mode | Object |
 | --- | --- | --- |
 | `]f` / `[f` | n, x, o | Next / previous function |
-| `]]` / `[[` | n, x, o | Next / previous class |
+| `]k` / `[k` | n, x, o | Next / previous class |
 
 ## Completion (Blink, insert mode)
 
@@ -175,6 +183,19 @@ Move (next / previous):
 | `<S-Tab>` | Select previous item (falls back to tab) |
 | `<C-b>` | Scroll documentation up |
 | `<C-f>` | Scroll documentation down |
+
+## Terminal
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<Space>t` | n | Toggle a floating terminal |
+| `<Space>gg` | n | Open lazygit (requires the `lazygit` binary) |
+
+## Folding
+
+Buffers with a treesitter parser fold with `foldmethod=expr` (tree-sitter based).
+`zc` / `zo` close / open a fold, `zM` / `zR` close / open all folds. Fold levels
+start fully open (`foldlevelstart = 99`).
 
 ## Flash
 

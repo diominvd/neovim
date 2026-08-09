@@ -33,13 +33,17 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Gitsigns — git hunks, diff, preview, blame.
 * Undotree — visual history of changes (`<Space>uu`).
 * Mini.surround — surround editing (`gsa` / `gsd` / `gsr`).
-* Snacks (indent + scroll) — indent guides and a scrollbar, nothing else enabled.
+* Snacks (indent + scroll + terminal) — indent guides, a scrollbar and a floating
+  terminal (`<Space>t`), nothing else enabled.
 * Noice / Trouble / Todo-comments.
+* Telescope-ui-select — `vim.ui.select` themed with Telescope.
 * Smart search — `ignorecase` + `smartcase`, live `:s` preview.
 * Visible trailing whitespace and tabs (stripped on save, skips prose and binaries).
 * Soft wrapping only for prose filetypes (markdown, text, tex, rst).
 * Diagnostics + LSP hover window auto-opens on `CursorHold` only over an error/warning line; `K` forces it anywhere.
 * Inlay hints toggle per buffer (`<Space>ih`).
+* Treesitter-based folding for every buffer with a parser.
+* Yank highlight via `vim.highlight.on_yank`.
 * Semantic versioning with `:ConfigVersion` and `scripts/bump.sh`.
 
 ## Languages
@@ -124,6 +128,7 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
 * A [Nerd Font](https://www.nerdfonts.com/)
 * `ripgrep`, `fd`
 * `make` / C compiler
+* `lazygit` (optional — `<Space>gg` notifies until it is installed)
 
 ## Installation
 
@@ -142,9 +147,17 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 
 | Prefix | Group |
 | --- | --- |
+| `<Space>c` | Code |
 | `<Space>f` | Find (Telescope) |
 | `<Space>g` | Git |
+| `<Space>h` | Help |
+| `<Space>i` | Inlay |
+| `<Space>m` | Markdown |
+| `<Space>q` | Quit / Session |
+| `<Space>r` | Refactor |
 | `<Space>s` | Split |
+| `<Space>t` | Terminal |
+| `<Space>u` | Undo / Format |
 | `<Space>x` | Diagnostics / Trouble |
 
 ### Most used
@@ -158,6 +171,9 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 | `<S-h>` / `<S-l>` | Previous / next buffer |
 | `s` / `S` | Flash jump / treesitter |
 | `gsa` / `gsd` / `gsr` | Add / delete / replace surrounding |
+| `<leader>t` | Toggle floating terminal |
+| `<leader>gg` | Open lazygit |
+| `<leader>hh` | Clear search highlight |
 | `<leader>uu` | Undo tree |
 | `<leader>e` | Toggle file explorer |
 
