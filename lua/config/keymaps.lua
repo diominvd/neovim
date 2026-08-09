@@ -117,6 +117,18 @@ map({ "n", "x", "o" }, "S", function()
 	require("flash").treesitter()
 end, "Flash treesitter")
 
+---------- Terminal ----------
+map("n", "<leader>t", function()
+	require("snacks").terminal.toggle(nil, { win = { position = "float" } })
+end, "Toggle terminal")
+map("n", "<leader>gg", function()
+	if vim.fn.executable("lazygit") == 1 then
+		require("snacks").lazygit()
+	else
+		vim.notify("lazygit is not installed", vim.log.levels.WARN, { title = "lazygit" })
+	end
+end, "Open lazygit")
+
 map("n", "<leader>e", ":Neotree toggle<CR>", "Toggle neo-tree")
 map("n", "<leader>mp", ":RenderMarkdown toggle<CR>", "Toggle Markdown Preview")
 
