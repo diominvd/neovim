@@ -25,9 +25,17 @@ return {
 		})
 
 		wk.add({
+			{ "<leader>c", group = "Code" },
 			{ "<leader>f", group = "Find" },
 			{ "<leader>g", group = "Git" },
+			{ "<leader>h", group = "Help" },
+			{ "<leader>i", group = "Inlay" },
+			{ "<leader>m", group = "Markdown" },
+			{ "<leader>q", group = "Quit / Session" },
+			{ "<leader>r", group = "Refactor" },
 			{ "<leader>s", group = "Split" },
+			{ "<leader>t", group = "Terminal" },
+			{ "<leader>u", group = "Undo / Format" },
 			{ "<leader>x", group = "Diagnostics" },
 		})
 
