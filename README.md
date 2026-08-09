@@ -33,8 +33,9 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Gitsigns — git hunks, diff, preview, blame.
 * Undotree — visual history of changes (`<Space>uu`).
 * Mini.surround — surround editing (`gsa` / `gsd` / `gsr`).
-* Snacks (indent + scroll + terminal) — indent guides, a scrollbar and a floating
-  terminal (`<Space>t`), nothing else enabled.
+* Snacks (indent + scroll + terminal) — indent guides, a scrollbar and a
+  bottom-anchored floating terminal (`<Space>t`) confined to the editor area,
+  nothing else enabled.
 * Noice / Trouble / Todo-comments.
 * Telescope-ui-select — `vim.ui.select` themed with Telescope.
 * Smart search — `ignorecase` + `smartcase`, live `:s` preview.
@@ -171,8 +172,8 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 | `<S-h>` / `<S-l>` | Previous / next buffer |
 | `s` / `S` | Flash jump / treesitter |
 | `gsa` / `gsd` / `gsr` | Add / delete / replace surrounding |
-| `<leader>t` | Toggle floating terminal |
-| `<leader>gg` | Open lazygit |
+| `<leader>t` | Toggle bottom-anchored floating terminal |
+| `<leader>gg` | Open lazygit fullscreen |
 | `<leader>hh` | Clear search highlight |
 | `<leader>uu` | Undo tree |
 | `<leader>e` | Toggle file explorer |

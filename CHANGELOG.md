@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Terminal (`<Space>t`): the float is anchored to the bottom and confined to the
+  editor area (no longer overlaps neo-tree); square `single` border.
+- LazyGit (`<Space>gg`): opens in a fullscreen float instead of the small terminal window.
+
 ## [0.4.0] - 2026-08-10
 
 ### Added

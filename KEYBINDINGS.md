@@ -188,8 +188,8 @@ Move (next / previous):
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `<Space>t` | n | Toggle a floating terminal |
-| `<Space>gg` | n | Open lazygit (requires the `lazygit` binary) |
+| `<Space>t` | n | Toggle the bottom-anchored floating terminal (confined to the editor area) |
+| `<Space>gg` | n | Open lazygit fullscreen (requires the `lazygit` binary) |
 
 ## Folding
 
