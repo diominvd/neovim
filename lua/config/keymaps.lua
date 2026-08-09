@@ -139,7 +139,17 @@ map("n", "<leader>t", function()
 end, "Toggle terminal")
 map("n", "<leader>gg", function()
 	if vim.fn.executable("lazygit") == 1 then
-		require("snacks").lazygit()
+		require("snacks").lazygit({
+			win = {
+				position = "float",
+				relative = "editor",
+				row = 0,
+				col = 0,
+				width = 0,
+				height = 0,
+				border = "single",
+			},
+		})
 	else
 		vim.notify("lazygit is not installed", vim.log.levels.WARN, { title = "lazygit" })
 	end
