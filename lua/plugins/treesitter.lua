@@ -58,10 +58,10 @@ return {
 		map_move("[f", function()
 			move.goto_previous_start("@function.outer", "textobjects")
 		end, "Prev function")
-		map_move("]]", function()
+		map_move("]k", function()
 			move.goto_next_start("@class.outer", "textobjects")
 		end, "Next class")
-		map_move("[[", function()
+		map_move("[k", function()
 			move.goto_previous_start("@class.outer", "textobjects")
 		end, "Prev class")
 	end,
