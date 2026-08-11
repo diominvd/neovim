@@ -15,11 +15,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 ---------- General ----------
-map("i", "jk", "<ESC>", "Exit from insert mode")
-map("i", "kj", "<ESC>", "Exit from insert mode")
-map("v", "jk", "<ESC>", "Exit from visual mode")
-map("v", "kj", "<ESC>", "Exit from visual mode")
-
 map("n", "<leader>w", ":w<CR>", "Save buffer")
 map("n", "<leader>W", ":wqa<CR>", "Save all and exit")
 map("n", "<leader>qq", ":qa!<CR>", "Exit without saving")
