@@ -257,3 +257,24 @@ Examples:
 
 Sessions are saved automatically on exit and restored on startup (except for
 `/`, `~` and `~/Downloads`).
+
+## Hardtime (training)
+
+[hardtime.nvim](https://github.com/m4xshen/hardtime.nvim) is enabled by default
+and helps you break bad habits while learning Vim motions:
+
+* **Blocks the arrow keys** in normal, insert, visual and terminal modes — use
+  `hjkl` (or counts, e.g. `5j`) instead.
+* **Disables the mouse**.
+* **Detects repeated keys** (e.g. `j j j` within a second) and hints a better
+  command (e.g. `3j`), plus suggests more efficient alternatives — `D` instead
+  of `d$`, `A` instead of `$a`, `C` instead of `ciw`, and so on.
+
+| Command | Action |
+| --- | --- |
+| `:Hardtime toggle` | Turn hardtime on / off for the current session |
+| `:Hardtime enable` / `:Hardtime disable` | Force hardtime on / off |
+| `:Hardtime report` | Show your most frequent bad habits |
+
+Hints are shown via `vim.notify` (rendered by Noice). A log is written to
+`~/.local/state/nvim/hardtime.nvim.log`.

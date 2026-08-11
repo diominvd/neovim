@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- hardtime.nvim — training plugin that blocks the arrow keys (normal, insert,
+  visual, terminal) and the mouse, and hints better motions (`3j`, `D`, `A`, …)
+  when lazy habits are detected. Toggle with `:Hardtime toggle`, review habits
+  with `:Hardtime report`.
+
 ### Changed
 
 - Terminal (`<Space>t`): the float is anchored to the bottom and confined to the

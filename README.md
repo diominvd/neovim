@@ -31,6 +31,8 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Flash — motion with labels.
 * Conform — format on save (StyLua, Ruff, fixjson, prettierd).
 * Gitsigns — git hunks, diff, preview, blame.
+* Hardtime — blocks arrows/mouse and hints better motions while you learn
+  (`:Hardtime toggle` / `:Hardtime report`).
 * Undotree — visual history of changes (`<Space>uu`).
 * Mini.surround — surround editing (`gsa` / `gsd` / `gsr`).
 * Snacks (indent + scroll + terminal) — indent guides, a scrollbar and a
@@ -105,6 +107,7 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
     │   ├── flash.lua
     │   ├── conform.lua
     │   ├── gitsigns.lua
+    │   ├── hardtime.lua
     │   ├── noice.lua
     │   ├── trouble.lua
     │   ├── which-key.lua
