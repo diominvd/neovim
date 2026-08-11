@@ -70,7 +70,7 @@ map("n", "<leader>fh", ":Telescope help_tags<CR>", "Help tags")
 map("n", "<leader>fw", ":Telescope grep_string<CR>", "Find word")
 map("n", "<leader>fo", ":Telescope oldfiles<CR>", "Recent files")
 map("n", "<leader>fk", ":Telescope keymaps<CR>", "Keymaps")
-map("n", "<leader>fs", ":SessionSearch<CR>", "Session search")
+map("n", "<leader>fs", ":AutoSession search<CR>", "Session search")
 
 ---------- Git ----------
 map("n", "<leader>gc", ":Telescope git_commits<CR>", "Git commits")
