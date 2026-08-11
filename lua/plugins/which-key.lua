@@ -39,15 +39,13 @@ return {
 			{ "<leader>x", group = "Diagnostics" },
 		})
 
+		-- Which-key opens the popup at the left edge of the whole editor by
+		-- default, which overlaps the neo-tree column. Anchor it to the left
+		-- edge of the current editor window (falling back to the first
+		-- non-neo-tree window) and cap its width to that window.
 		local view = require("which-key.view")
+		local config = require("which-key.config")
 
-		-- Which-key stretches its popup across the whole editor, which overlaps
-		-- the neo-tree on the left. Right before showing it, anchor it to the
-		-- left edge of the current editor window and cap the width so it fits
-		-- the editor area (col/width are re-read on every show).
-		--
-		-- Neo-tree keeps focus when a directory is opened, so anchor to the
-		-- first non-neo-tree window instead of the focused one.
 		local function anchor()
 			local winid = vim.api.nvim_get_current_win()
 			if vim.bo[vim.api.nvim_win_get_buf(winid)].filetype == "neo-tree" then
@@ -58,10 +56,9 @@ return {
 					end
 				end
 			end
-			local conf = require("which-key.config")
-			local col = vim.fn.win_screenpos(winid)[2] - 1
-			conf.win.col = col
-			conf.win.width = vim.o.columns - col
+			local scr = vim.fn.win_screenpos(winid)
+			config.options.win.col = scr[2] - 1
+			config.options.win.width = vim.api.nvim_win_get_width(winid)
 		end
 
 		local show = view.show
