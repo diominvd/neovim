@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-08-12
+
 ### Added
 
 - hardtime.nvim — training plugin that blocks the arrow keys (normal, insert,
@@ -45,6 +47,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `<Space>fs` raised `E492: Not an editor command: SessionSearch` on the current
   auto-session; the session picker works again.
+- Which-key popup is anchored to the left edge of the current editor window
+  (and capped to its width) on every show, so it no longer overlaps the
+  neo-tree column.
 
 
 ## [0.4.0] - 2026-08-10
