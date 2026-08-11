@@ -13,12 +13,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   visual, terminal) and the mouse, and hints better motions (`3j`, `D`, `A`, …)
   when lazy habits are detected. Toggle with `:Hardtime toggle`, review habits
   with `:Hardtime report`.
+- better-escape.nvim — `jk` / `kj` exit insert mode with **no typing latency**:
+  the first key is inserted immediately, only the second has to arrive within
+  ~150 ms. Replaces the old `jk` / `kj` insert mappings, which delayed every
+  `j` / `k` by `timeoutlen`.
 
 ### Changed
 
 - Terminal (`<Space>t`): the float is anchored to the bottom and confined to the
   editor area (no longer overlaps neo-tree); square `single` border.
 - LazyGit (`<Space>gg`): opens in a fullscreen float instead of the small terminal window.
+- Session search (`<Space>fs`) runs `:AutoSession search` — `:SessionSearch` no
+  longer exists in the current auto-session.
+- Telescope is lazy-loaded (`:Telescope` command) and the auto-session picker
+  registers it on demand (`load_on_setup = false`), so it stays out of startup.
+- auto-session uses the current `picker_opts` API (`theme_conf` was deprecated).
+- `<Space>hk` resolves `KEYBINDINGS.md` via `stdpath("config")` instead of
+  walking the debug source path.
+
+### Removed
+
+- Visual-mode `jk` / `kj` mappings — they delayed every `j` / `k` movement by
+  `timeoutlen`; use `<Esc>` to leave visual mode.
+- Dead auto-session options: `theme_conf` and `previewer = false` (the
+  session-lens picker always renders its own preview).
+- `result_width = 0.8` in telescope layout — not a valid telescope option.
+- Global `linebreak` / `breakindent` — wrapping stays window-local for prose
+  filetypes only.
+
+### Fixed
+
+- `<Space>fs` raised `E492: Not an editor command: SessionSearch` on the current
+  auto-session; the session picker works again.
+
 
 ## [0.4.0] - 2026-08-10
 

@@ -60,8 +60,7 @@ Pressing `<Space>` shows a popup with every group and mapping.
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `jk` / `kj` | i | Exit insert mode |
-| `jk` / `kj` | v | Exit visual mode |
+| `jk` / `kj` | i | Exit insert mode (better-escape, ~150 ms) |
 | `<` / `>` | v | Indent left / right, keeping the selection |
 | `J` / `K` | v | Move selection down / up (re-indents) |
 | `---` | i | Insert an em-dash (`—`) |

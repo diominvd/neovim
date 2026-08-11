@@ -33,6 +33,8 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Gitsigns — git hunks, diff, preview, blame.
 * Hardtime — blocks arrows/mouse and hints better motions while you learn
   (`:Hardtime toggle` / `:Hardtime report`).
+* Better-escape — `jk` / `kj` exit insert mode with no typing latency (the
+  first key is inserted immediately).
 * Undotree — visual history of changes (`<Space>uu`).
 * Mini.surround — surround editing (`gsa` / `gsd` / `gsr`).
 * Snacks (indent + scroll + terminal) — indent guides, a scrollbar and a
@@ -104,6 +106,7 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
     │   ├── bufferline.lua
     │   ├── lualine.lua
     │   ├── auto-session.lua
+    │   ├── better-escape.lua
     │   ├── flash.lua
     │   ├── conform.lua
     │   ├── gitsigns.lua
