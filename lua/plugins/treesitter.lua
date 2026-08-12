@@ -5,22 +5,17 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
 	config = function()
-		require("nvim-treesitter").setup({})
-
+		local ts = require("nvim-treesitter")
 		local langs = require("config.languages")
 
 		-- Install missing parsers (from the per-language list) on startup.
 		vim.schedule(function()
-			local want = langs.parsers()
-			local installed = require("nvim-treesitter.config").get_installed("parsers")
-			local missing = {}
-			for _, lang in ipairs(want) do
-				if not vim.tbl_contains(installed, lang) then
-					missing[#missing + 1] = lang
-				end
-			end
+			local installed = ts.get_installed("parsers")
+			local missing = vim.tbl_filter(function(lang)
+				return not vim.tbl_contains(installed, lang)
+			end, langs.parsers())
 			if #missing > 0 then
-				require("nvim-treesitter.install").install(missing, { summary = true })
+				ts.install(missing, { summary = true })
 			end
 		end)
 

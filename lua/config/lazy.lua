@@ -1,5 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 	vim.fn.system({
 		"git",
@@ -16,8 +16,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
-		-- Only theme.lua is a plugin spec; palette.lua in the same dir is a
-		-- plain module and must not be scanned as a spec (see Spec:normalize).
+		-- theme.lua is the theme's plugin spec; palette.lua in the same
+		-- directory is a plain module and must not be treated as one.
 		{ import = "appearance.theme" },
 	},
 	ui = {

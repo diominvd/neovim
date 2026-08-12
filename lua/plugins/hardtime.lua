@@ -5,7 +5,7 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	opts = {
-		-- Блокировать стрелки не только в normal/insert, но и в visual/terminal.
+		-- Restrict arrow keys not only in normal/insert but also in visual/terminal.
 		disabled_keys = {
 			["<Up>"] = { "", "i", "x", "t" },
 			["<Down>"] = { "", "i", "x", "t" },
