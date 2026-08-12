@@ -71,12 +71,12 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Strip trailing whitespace on save (skip prose: trailing spaces are meaningful)
+-- Strip trailing whitespace on save (skip special and prose buffers:
+-- trailing spaces are meaningful in prose).
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function()
-		local ft = vim.bo.filetype
-		if vim.bo.binary or vim.list_contains(wrap_filetypes, ft) then
+		if vim.bo.binary or vim.bo.buftype ~= "" or vim.list_contains(wrap_filetypes, vim.bo.filetype) then
 			return
 		end
 		local view = vim.fn.winsaveview()
