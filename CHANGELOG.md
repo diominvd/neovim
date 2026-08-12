@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Opening a directory (or `nvim` with no arguments) starts with neo-tree focused
+  and a pristine, unnamed buffer (`[No Name]`) on the right; the buffer named
+  after the directory is removed. Focus stays in the file explorer.
+
+### Changed
+
+- blink.cmp is a direct dependency of the LSP setup, so its capabilities are
+  always wired in (the silent `require` fallback is gone).
+- Trailing-whitespace strip on save skips special buffers (terminal, quickfix,
+  …) in addition to prose and binary ones.
+- nvim-treesitter parser auto-install rewritten through the public module API.
+- Startup is quieter: noice loads eagerly (it catches startup notifications)
+  and `shortmess` includes `I` (no "Press ENTER" prompt).
+- Remaining non-English comments were translated; gitsigns uses `require`
+  instead of `package.loaded`; the lazy.nvim bootstrap uses `vim.uv`.
+- Which-key popup anchoring refactored (internally) — behavior is unchanged.
+
+### Fixed
+
+- `<leader>ft` (find TODOs / FIXMEs) raised `attempt to call a nil value`: it
+  called `telescope.builtin.todo_comments`, which does not exist. It now runs
+  the `TodoTelescope` command through a lazy `keys` trigger, keeping Telescope
+  cold until first use.
+
 ## [0.5.0] - 2026-08-12
 
 ### Added

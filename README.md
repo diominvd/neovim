@@ -25,6 +25,9 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Telescope — fuzzy finder (files, grep, buffers).
 * Treesitter — syntax highlighting, text objects.
 * Neo-tree — file explorer with git integration.
+* Opening a directory (or `nvim` with no arguments) starts with neo-tree focused
+  and a pristine, unnamed buffer on the right — no netrw, no buffer named after
+  the directory.
 * Bufferline — tab-like buffer bar.
 * Lualine — status line.
 * Auto-sessions — restore editor state on restart.
