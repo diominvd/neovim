@@ -1,6 +1,5 @@
 return {
 	"folke/noice.nvim",
-	event = "VeryLazy",
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 	},
@@ -18,7 +17,7 @@ return {
 			views = {
 				mini = {
 					border = { style = "single" },
-					timeout = 3000, -- сколько уведомление висит на экране, мс
+					timeout = 3000, -- how long a notification stays on screen, ms
 				},
 				cmdline_popup = {
 					border = { style = "single" },

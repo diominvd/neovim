@@ -9,6 +9,8 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.inccommand = "split"
 opt.showmode = false
+-- Don't pause for "Press ENTER" after startup messages (they are shown by noice).
+opt.shortmess:append("I")
 
 -- Interface Options
 opt.termguicolors = true
