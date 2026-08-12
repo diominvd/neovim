@@ -1,10 +1,29 @@
--- Opening neo-tree when opening a directory
+-- Open a pristine, unnamed buffer next to neo-tree when starting on a
+-- directory (or with no arguments), leaving focus in the file explorer.
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
-		local stats = vim.uv.fs_stat(vim.fn.argv(0) or "")
-		if vim.fn.argc() == 0 or (stats and stats.type == "directory") then
-			vim.cmd("Neotree show")
+		local argc = vim.fn.argc()
+		local opening_dir = argc == 0
+		if not opening_dir then
+			local stats = vim.uv.fs_stat(vim.fn.argv(0))
+			opening_dir = stats ~= nil and stats.type == "directory"
 		end
+		if not opening_dir then
+			return
+		end
+
+		vim.schedule(function()
+			-- Starting on a directory leaves a buffer named after it behind;
+			-- swap it for a clean, unnamed one.
+			local dirbuf = argc > 0 and vim.api.nvim_get_current_buf() or nil
+			if dirbuf then
+				vim.cmd("enew")
+			end
+			vim.cmd("Neotree focus")
+			if dirbuf and vim.api.nvim_buf_is_valid(dirbuf) then
+				vim.api.nvim_buf_delete(dirbuf, { force = true })
+			end
+		end)
 	end,
 })
 
