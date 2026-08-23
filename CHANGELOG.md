@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Visible current-line highlight: `cursorline` was already enabled, but the
+  transparent gruvbox-material background made it invisible; it is now pinned
+  to a palette color so the active row stands out.
+- Neo-tree collapses to its root when the last named buffer closes — every
+  expanded folder folds back instead of leaving deep nesting behind. Empty
+  (`[No Name]`) and special buffers don't count as open files.
+
+### Fixed
+
+- Neo-tree no longer folds expanded folders when switching to a buffer whose
+  file sits higher in the tree (`follow_current_file.leave_dirs_open = true`):
+  going deeper still expands, going back up keeps what is open.
+
+### Changed
+
+- Internal cleanups with no behavior change: diagnostic highlights are
+  generated from a severity table, treesitter motion maps are data-driven,
+  redundant empty `lsp` / `formatter` fields dropped from `languages.lua`,
+  and an unused `statuscolumn` module was never imported and is gone.
+
 ## [0.5.1] - 2026-08-13
 
 ### Added

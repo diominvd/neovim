@@ -24,7 +24,9 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Blink.cmp — autocompletion.
 * Telescope — fuzzy finder (files, grep, buffers).
 * Treesitter — syntax highlighting, text objects.
-* Neo-tree — file explorer with git integration.
+* Neo-tree — file explorer with git integration. Folders stay open while you
+  switch buffers; when the last buffer closes, the tree folds back to its root.
+* Current-line highlight that stays visible on the transparent background.
 * Opening a directory (or `nvim` with no arguments) starts with neo-tree focused
   and a pristine, unnamed buffer on the right — no netrw, no buffer named after
   the directory.
