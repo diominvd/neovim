@@ -59,14 +59,10 @@ local languages = {
 	},
 	["Shell"] = {
 		enabled = true,
-		lsp = {},
-		formatter = {},
 		parsers = { "bash" },
 	},
 	["C"] = {
 		enabled = true,
-		lsp = {},
-		formatter = {},
 		parsers = { "c" },
 	},
 }
