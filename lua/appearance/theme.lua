@@ -44,25 +44,13 @@ return {
 
 			hi("LspInfoBorder", { bg = "NONE", fg = p.border_fg })
 
-			hi("DiagnosticFloatingError", { bg = "NONE", fg = p.red })
-			hi("DiagnosticFloatingWarn", { bg = "NONE", fg = p.yellow })
-			hi("DiagnosticFloatingInfo", { bg = "NONE", fg = p.aqua })
-			hi("DiagnosticFloatingHint", { bg = "NONE", fg = p.green })
-
-			hi("DiagnosticVirtualTextError", { bg = "NONE", fg = p.red })
-			hi("DiagnosticVirtualTextWarn", { bg = "NONE", fg = p.yellow })
-			hi("DiagnosticVirtualTextInfo", { bg = "NONE", fg = p.aqua })
-			hi("DiagnosticVirtualTextHint", { bg = "NONE", fg = p.green })
-
-			hi("DiagnosticSignError", { bg = "NONE", fg = p.red })
-			hi("DiagnosticSignWarn", { bg = "NONE", fg = p.yellow })
-			hi("DiagnosticSignInfo", { bg = "NONE", fg = p.aqua })
-			hi("DiagnosticSignHint", { bg = "NONE", fg = p.green })
-
-			hi("DiagnosticUnderlineError", { undercurl = true, sp = p.red })
-			hi("DiagnosticUnderlineWarn", { undercurl = true, sp = p.yellow })
-			hi("DiagnosticUnderlineInfo", { undercurl = true, sp = p.aqua })
-			hi("DiagnosticUnderlineHint", { undercurl = true, sp = p.green })
+			local severity_colors = { Error = p.red, Warn = p.yellow, Info = p.aqua, Hint = p.green }
+			for severity, color in pairs(severity_colors) do
+				hi("DiagnosticFloating" .. severity, { bg = "NONE", fg = color })
+				hi("DiagnosticVirtualText" .. severity, { bg = "NONE", fg = color })
+				hi("DiagnosticSign" .. severity, { bg = "NONE", fg = color })
+				hi("DiagnosticUnderline" .. severity, { undercurl = true, sp = color })
+			end
 
 			hi("NoiceCmdlinePopup", { bg = "NONE" })
 			hi("NoiceCmdlinePopupBorder", { bg = "NONE", fg = p.border_fg })
