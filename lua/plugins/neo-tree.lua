@@ -13,7 +13,7 @@ return {
 			enable_git_status = true,
 			enable_diagnostics = true,
 			filesystem = {
-				follow_current_file = { enabled = true },
+				follow_current_file = { enabled = true, leave_dirs_open = true },
 				use_libuv_file_watcher = true,
 				filtered_items = {
 					visible = true,
