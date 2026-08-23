@@ -187,7 +187,7 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 | `<leader>gg` | Open lazygit fullscreen |
 | `<leader>hh` | Clear search highlight |
 | `<leader>uu` | Undo tree |
-| `<leader>e` | Toggle file explorer |
+| `<leader>e` / `<leader>E` | Toggle file explorer / collapse its tree to the root |
 
 ## Versioning
 

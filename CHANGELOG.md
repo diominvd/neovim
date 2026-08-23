@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Neo-tree collapses to its root when the last named buffer closes — every
   expanded folder folds back instead of leaving deep nesting behind. Empty
   (`[No Name]`) and special buffers don't count as open files.
+- Manual collapse: `<Space>E` folds the explorer tree back to its root from
+  anywhere; `W` does the same inside the neo-tree window. The logic lives in
+  `lua/utils/neotree.lua`, shared by the keymaps and the autocmd.
 
 ### Fixed
 

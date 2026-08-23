@@ -53,6 +53,7 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<Space>uF` | n | Toggle auto-format on save (conform) |
 | `<Space>fmt` | n | Format current buffer (conform, falls back to LSP) |
 | `<Space>e` | n | Toggle neo-tree file explorer |
+| `<Space>E` | n | Collapse the explorer tree to its root (close all open folders) |
 | `<Space>mp` | n | Toggle markdown rendering (render-markdown) |
 | `<Space>Q` | n | Delete current session and quit |
 
@@ -237,6 +238,7 @@ Examples:
 | `h` | Close node / go to parent |
 | `v` | Open in vertical split |
 | `s` | Open in horizontal split |
+| `W` | Collapse the whole tree to its root (close all open folders) |
 | `<Space>` | Disabled (reserved for the leader) |
 
 ## Telescope Picker Window
