@@ -19,6 +19,7 @@ return {
 				vim.api.nvim_set_hl(0, group, opts)
 			end
 
+			hi("CursorLine", { bg = p.selection })
 			hi("NormalFloat", { bg = "NONE" })
 			hi("FloatBorder", { bg = "NONE", fg = p.border_fg })
 			hi("UtilsHoverHeader", { fg = vim.api.nvim_get_hl(0, { name = "Comment" }).fg, bold = true })
