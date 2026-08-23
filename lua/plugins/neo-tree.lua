@@ -32,6 +32,7 @@ return {
 					["h"] = "close_node",
 					["v"] = "open_vsplit",
 					["s"] = "open_split",
+					["W"] = "close_all_nodes",
 				},
 			},
 			default_component_configs = {

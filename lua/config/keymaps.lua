@@ -148,7 +148,10 @@ map("n", "<leader>gg", function()
 	end
 end, "Open lazygit")
 
-map("n", "<leader>e", ":Neotree toggle<CR>", "Toggle neo-tree")
+map("n", "<leader>e", ":Neotree toggle<CR>", "Toggle file explorer")
+map("n", "<leader>E", function()
+	require("utils.neotree").collapse_to_root()
+end, "Collapse explorer tree to root")
 map("n", "<leader>mp", ":RenderMarkdown toggle<CR>", "Toggle Markdown Preview")
 
 map("n", "<leader>Q", function()
