@@ -44,20 +44,15 @@ return {
 			end, { desc = "Select " .. query })
 		end
 
-		local function map_move(lhs, fn, desc)
-			vim.keymap.set({ "n", "x", "o" }, lhs, fn, { desc = desc })
+		for _, m in ipairs({
+			{ "]f", move.goto_next_start, "@function.outer", "Next function" },
+			{ "[f", move.goto_previous_start, "@function.outer", "Prev function" },
+			{ "]k", move.goto_next_start, "@class.outer", "Next class" },
+			{ "[k", move.goto_previous_start, "@class.outer", "Prev class" },
+		}) do
+			vim.keymap.set({ "n", "x", "o" }, m[1], function()
+				m[2](m[3], "textobjects")
+			end, { desc = m[4] })
 		end
-		map_move("]f", function()
-			move.goto_next_start("@function.outer", "textobjects")
-		end, "Next function")
-		map_move("[f", function()
-			move.goto_previous_start("@function.outer", "textobjects")
-		end, "Prev function")
-		map_move("]k", function()
-			move.goto_next_start("@class.outer", "textobjects")
-		end, "Next class")
-		map_move("[k", function()
-			move.goto_previous_start("@class.outer", "textobjects")
-		end, "Prev class")
 	end,
 }
