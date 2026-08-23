@@ -27,6 +27,33 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	end,
 })
 
+-- Collapse the neo-tree to its root when the last named buffer is deleted
+-- (only empty [No Name] buffers remain): close every expanded folder.
+-- The delayed check outlasts neo-tree's 100ms follow debounce,
+-- which would otherwise re-render over the collapsed tree.
+vim.api.nvim_create_autocmd({ "BufDelete", "BufWipeout" }, {
+	callback = function()
+		vim.defer_fn(function()
+			for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+				local listed = vim.api.nvim_buf_is_valid(bufnr) and vim.bo[bufnr].buflisted
+				if listed and vim.bo[bufnr].buftype == "" and vim.fn.bufname(bufnr) ~= "" then
+					return
+				end
+			end
+			local ok, renderer = pcall(require, "neo-tree.ui.renderer")
+			if not ok then
+				return
+			end
+			local state = require("neo-tree.sources.manager").get_state("filesystem")
+			if state and state.tree and renderer.window_exists(state) then
+				state.explicitly_opened_nodes = {}
+				renderer.collapse_all_nodes(state.tree)
+				renderer.redraw(state)
+			end
+		end, 200)
+	end,
+})
+
 -- Display diagnostics and LSP hover in a single window.
 -- Auto-opens only when the cursor is on an error/warning line; <K> forces it anywhere.
 vim.api.nvim_create_autocmd("CursorHold", {
