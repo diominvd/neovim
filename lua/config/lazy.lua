@@ -9,6 +9,10 @@ if not vim.uv.fs_stat(lazypath) then
 		lazyrepo,
 		lazypath,
 	})
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_err_writeln("Failed to clone lazy.nvim:\n" .. vim.fn.system({ "git", "clone", lazyrepo, lazypath }))
+		return
+	end
 end
 vim.opt.rtp:prepend(lazypath)
 

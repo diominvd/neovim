@@ -63,7 +63,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- Treesitter-based folding for buffers that have a parser.
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function(args)
-		if not vim.treesitter.language.add(vim.bo[args.buf].filetype) then
+		local ok = pcall(vim.treesitter.get_parser, args.buf)
+		if not ok then
 			return
 		end
 		vim.opt_local.foldmethod = "expr"

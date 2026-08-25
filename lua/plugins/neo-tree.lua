@@ -12,6 +12,15 @@ return {
 			close_if_last_window = true,
 			enable_git_status = true,
 			enable_diagnostics = true,
+			event_handlers = {
+				{
+					event = "neo_tree_buffer_enter",
+					handler = function()
+						vim.wo.number = true
+						vim.wo.relativenumber = true
+					end,
+				},
+			},
 			filesystem = {
 				follow_current_file = { enabled = true, leave_dirs_open = true },
 				use_libuv_file_watcher = true,
