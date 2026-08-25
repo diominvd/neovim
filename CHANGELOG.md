@@ -12,6 +12,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `colorcolumn` no longer creates a visible block on the cursor line: removed
   the conflicting `opt.colorcolumn = "80"` which clashes with transparent
   gruvbox-material + `CursorLine`.
+- `conform.nvim`: replaced deprecated `lsp_fallback = true` with
+  `lsp_format = "fallback"`.
+- Treesitter fold autocmd now uses `pcall(vim.treesitter.get_parser)` instead
+  of `vim.treesitter.language.add`, which only checked already-loaded parsers.
+  Folds now work on first open of a filetype after cold start.
+- Bufferline and Telescope keymaps use `require()` closures instead of
+  `:Command<CR>` strings, preventing `E492: Not an editor command` when
+  the plugin hasn't loaded yet.
+- `lazy.nvim` bootstrap now checks `vim.v.shell_error` after `git clone` and
+  shows an error message on failure instead of silently breaking.
+
+### Changed
+
+- neo-tree: removed `branch = "v3.x"` (now the default), removed
+  `event_handlers` for `number`/`relativenumber` (already set globally).
+- `nvim-treesitter-textobjects`: removed redundant default options
+  (`lookahead`, `set_jumps`).
+- `nvim-autopairs`: removed empty `ts_config` (already the default).
+- `nvim-lspconfig`: simplified capabilities — `blink.cmp.get_lsp_capabilities()`
+  already includes base capabilities, no need for double-wrapping.
+- `blink.cmp`, `mini.surround`, `bufferline`: removed `version = "*"` (lockfile
+  handles pinning; avoids unnecessary tag checks on startup).
+- `flash.nvim`: lazy-loaded via `keys` spec (`s`/`S`), only loads on first use.
+- `mason-tool-installer`: `run_on_start = false` to avoid spawning processes
+  on every boot.
+- `fillchars` uses modern table syntax: `{ eob = " " }`.
+- `keymaps.lua`: re-indented from tabs to 2-space (consistent with the rest of
+  the config).
+- Plugin configs simplified: `autopairs`, `noice`, `lualine`, `render-markdown`
+  converted from `config = function() require().setup() end` to `opts = {}`.
+- All `:Command<CR>` keymap strings converted to Lua function closures for
+  consistency and lazy-safety.
 
 ## [0.6.0] - 2026-08-23
 
