@@ -1,6 +1,5 @@
 return {
 	"saghen/blink.cmp",
-	version = "*",
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 	},

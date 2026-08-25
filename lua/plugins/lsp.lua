@@ -9,9 +9,9 @@ return {
 			float = { border = "single" },
 		})
 
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-		vim.lsp.config("*", { capabilities = capabilities })
+		vim.lsp.config("*", {
+			capabilities = require("blink.cmp").get_lsp_capabilities(),
+		})
 
 		vim.lsp.config("lua_ls", {
 			settings = {

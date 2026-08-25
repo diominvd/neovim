@@ -1,6 +1,5 @@
 return {
 	"echasnovski/mini.surround",
-	version = "*",
 	config = function()
 		require("mini.surround").setup({
 			-- The `gs*` prefix is used because the default `s*` conflicts with flash.nvim jump.
