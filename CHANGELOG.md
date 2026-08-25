@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `colorcolumn` no longer creates a visible block on the cursor line: removed
+  the conflicting `opt.colorcolumn = "80"` which clashes with transparent
+  gruvbox-material + `CursorLine`.
+
 ## [0.6.0] - 2026-08-23
 
 ### Added

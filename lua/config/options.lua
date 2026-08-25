@@ -22,7 +22,6 @@ opt.signcolumn = "yes"
 opt.scrolloff = 8
 opt.winborder = "single"
 opt.wrap = false
-opt.colorcolumn = "80"
 
 -- Visualize trailing whitespace and tabs (hidden by default).
 opt.list = true
