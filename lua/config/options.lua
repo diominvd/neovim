@@ -16,7 +16,7 @@ opt.shortmess:append("I")
 opt.termguicolors = true
 opt.number = true
 opt.relativenumber = true
-opt.fillchars = "eob: "
+opt.fillchars = { eob = " " }
 opt.cursorline = true
 opt.signcolumn = "yes"
 opt.scrolloff = 8
