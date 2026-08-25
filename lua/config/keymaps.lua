@@ -132,14 +132,6 @@ map("n", "<leader>uF", function()
 	end
 end, "Toggle format on save")
 
----------- Plugins ----------
-map({ "n", "x", "o" }, "s", function()
-	require("flash").jump()
-end, "Flash jump")
-map({ "n", "x", "o" }, "S", function()
-	require("flash").treesitter()
-end, "Flash treesitter")
-
 ---------- Terminal ----------
 local function main_editor_win()
 	for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do

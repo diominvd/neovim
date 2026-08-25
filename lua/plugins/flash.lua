@@ -1,13 +1,15 @@
 return {
 	"folke/flash.nvim",
-	config = function()
-		require("flash").setup({
-			labels = "asdfghjklqwertyuiopzxcvbnm",
-			search = {
-				mode = function(str)
-					return "\\<" .. str
-				end,
-			},
-		})
-	end,
+	opts = {
+		labels = "asdfghjklqwertyuiopzxcvbnm",
+		search = {
+			mode = function(str)
+				return "\\<" .. str
+			end,
+		},
+	},
+	keys = {
+		{ "s", function() require("flash").jump() end, desc = "Flash jump", mode = { "n", "x", "o" } },
+		{ "S", function() require("flash").treesitter() end, desc = "Flash treesitter", mode = { "n", "x", "o" } },
+	},
 }
