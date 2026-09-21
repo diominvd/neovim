@@ -87,6 +87,10 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<A-h>` | n | Move buffer left (Bufferline) |
 | `<A-l>` | n | Move buffer right (Bufferline) |
 
+Tabs show LSP diagnostics inline (`E`/`W`/`I`/`H` + count), a yellow dot on
+modified buffers, and a green bar on the active one. **Right-click** a tab to
+close it. The bar auto-hides when only a single buffer is open.
+
 ## Find (Telescope)
 
 | Key | Mode | Action |
