@@ -1,8 +1,9 @@
 -- Central per-language configuration.
 --
 -- One entry per language. LSP servers, formatters and treesitter parsers are
--- enabled from here and auto-installed on startup (mason + nvim-treesitter).
--- Adding a new language is enough — restart nvim and everything installs.
+-- enabled from here. Treesitter parsers auto-install on startup; the LSP
+-- servers and formatters are installed once with :MasonInstallAll
+-- (<leader>Mi) — nothing else needs touching when a language is added.
 --
 --   enabled    toggle the whole language on/off (false = disabled)
 --   lsp        LSP servers to enable (diagnostics come from these too)

@@ -14,8 +14,17 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 		vim.schedule(function()
 			-- Starting on a directory leaves a buffer named after it behind;
-			-- swap it for a clean, unnamed one.
-			local dirbuf = argc > 0 and vim.api.nvim_get_current_buf() or nil
+			-- swap it for a clean, unnamed one. An auto-session restore may
+			-- have already replaced it with real buffers, so only treat the
+			-- current buffer as the directory placeholder when it is one.
+			local dirbuf = nil
+			if argc > 0 then
+				local cur = vim.api.nvim_get_current_buf()
+				local name = vim.api.nvim_buf_get_name(cur)
+				if name ~= "" and vim.fn.isdirectory(name) == 1 then
+					dirbuf = cur
+				end
+			end
 			if dirbuf then
 				vim.cmd("enew")
 			end

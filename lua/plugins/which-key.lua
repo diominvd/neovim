@@ -31,6 +31,7 @@ return {
 			{ "<leader>h", group = "Help" },
 			{ "<leader>i", group = "Inlay" },
 			{ "<leader>m", group = "Markdown" },
+			{ "<leader>M", group = "Mason" },
 			{ "<leader>q", group = "Quit / Session" },
 			{ "<leader>r", group = "Refactor" },
 			{ "<leader>s", group = "Split" },

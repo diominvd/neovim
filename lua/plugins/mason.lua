@@ -4,6 +4,11 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
+	keys = {
+		-- Install every LSP server / formatter listed in config/languages.lua.
+		{ "<leader>Mi", "<cmd>MasonInstallAll<CR>", desc = "Install all language tools" },
+		{ "<leader>Mo", "<cmd>Mason<CR>", desc = "Open Mason registry" },
+	},
 	config = function()
 		require("mason").setup({
 			ui = {

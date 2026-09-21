@@ -68,7 +68,15 @@ map("v", "<", "<gv", "Indent left")
 map("v", ">", ">gv", "Indent right")
 map("v", "J", ":m '>+1<CR>gv=gv", "Move selection down")
 map("v", "K", ":m '<-2<CR>gv=gv", "Move selection up")
-map("i", "---", "—", "Insert em-dash")
+-- Typing `---` inserts an em-dash in prose (text/tex/rst only — markdown
+-- keeps `---` free for horizontal rules).
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    if vim.list_contains({ "text", "tex", "rst" }, vim.bo[args.buf].filetype) then
+      vim.keymap.set("i", "---", "—", { buffer = args.buf, desc = "Insert em-dash" })
+    end
+  end,
+})
 
 ---------- Search (Telescope) ----------
 map("n", "<leader>ff", function()
@@ -120,7 +128,7 @@ map("n", "<leader>fmt", function()
   require("conform").format({
     lsp_format = "fallback",
     async = false,
-    timeout_ms = 500,
+    timeout_ms = 1500,
   })
 end, "Format buffer")
 map("n", "<leader>uF", function()

@@ -68,14 +68,15 @@ all read from this file, so there are no duplicated lists.
 ["TypeScript / React"] = {
     enabled = true,                                   -- false = disable the whole language
     ft = { "javascript", "typescript", "typescriptreact" }, -- filetypes for formatters
-    lsp = { "ts_ls" },                                -- LSP servers (enabled + auto-installed)
+    lsp = { "ts_ls" },                                -- LSP servers (enabled; install via :MasonInstallAll)
     formatter = { "prettierd", "prettier" },          -- conform formatters (list or per-ft table)
     parsers = { "javascript", "typescript", "tsx" },  -- treesitter parsers
 },
 ```
 
-* **Adding a language** — add one entry and restart nvim: the LSP server and
-  parsers install automatically via mason / nvim-treesitter.
+* **Adding a language** — add one entry, then run `:MasonInstallAll`
+  (`<leader>Mi`) once to install the LSP server and formatter via mason; the
+  treesitter parsers auto-install on the next startup.
 * **Disabling a language** — set `enabled = false` to stop its servers from
   starting and its formatter from running on save. Installed binaries are not
   deleted from disk.
@@ -165,6 +166,7 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 | `<Space>h` | Help |
 | `<Space>i` | Inlay |
 | `<Space>m` | Markdown |
+| `<Space>M` | Mason |
 | `<Space>q` | Quit / Session |
 | `<Space>r` | Refactor |
 | `<Space>s` | Split |
@@ -211,5 +213,5 @@ thing to link in a channel post about the update.
 | Icons missing | Install a [Nerd Font](https://www.nerdfonts.com/) |
 | Telescope grep empty | Install `ripgrep` |
 | Telescope find empty | Install `fd` |
-| LSP not working | Run `:Mason` and install the server |
+| LSP not working | Run `:MasonInstallAll` (`<leader>Mi`) — or open `:Mason` and install the server |
 | Plug-in not loading | Check `:Lazy` for errors |

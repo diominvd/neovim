@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `blink.cmp` v2: added the required
+  `build = require("blink.cmp").build():pwait()` step and the `blink.lib`
+  dependency (the native fuzzy matcher is built from source); `<C-/>` mirrors
+  `<C-space>` for terminals that swallow it.
+- `mason.nvim`: new `<leader>M` group — `<leader>Mi` (`:MasonInstallAll`) and
+  `<leader>Mo` (`:Mason`). LSP servers and formatters are now installed
+  explicitly with `:MasonInstallAll` after adding a language (treesitter
+  parsers still auto-install on startup; `run_on_start = false` stays for
+  fast startups).
+- `---` inserts an em-dash only in prose filetypes (`text`, `tex`, `rst`),
+  keeping `---` available for horizontal rules in markdown.
+- `conform`: format timeout raised 500 → 1500 ms (prettierd/ruff on big files).
+
+### Fixed
+
+- Opening `nvim <dir>` with an existing auto-session no longer deletes the
+  restored active buffer: the directory placeholder is only swapped when the
+  current buffer really is a directory.
+- `lazy-lock.json` removed from `.gitignore` (it stays tracked as the pinfile).
+
 ## [0.7.0] - 2026-08-25
 
 ### Fixed

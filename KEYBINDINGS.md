@@ -31,6 +31,7 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<Space>h` | Help |
 | `<Space>i` | Inlay |
 | `<Space>m` | Markdown |
+| `<Space>M` | Mason |
 | `<Space>q` | Quit / Session |
 | `<Space>r` | Refactor |
 | `<Space>s` | Split |
@@ -64,7 +65,7 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `jk` / `kj` | i | Exit insert mode (better-escape, ~150 ms) |
 | `<` / `>` | v | Indent left / right, keeping the selection |
 | `J` / `K` | v | Move selection down / up (re-indents) |
-| `---` | i | Insert an em-dash (`—`) |
+| `---` | i | Insert an em-dash (`—`) — prose filetypes only (`text`, `tex`, `rst`) |
 
 ## Windows & Splits
 
@@ -248,6 +249,13 @@ Examples:
 | `<C-j>` / `<C-k>` | i | Move selection down / up |
 | `<C-q>` | i | Close picker |
 | `q` | n | Close picker |
+
+## Mason (language tooling)
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<Space>Mi` | n | Install every LSP server / formatter from `lua/config/languages.lua` |
+| `<Space>Mo` | n | Open the Mason registry (`:Mason`) |
 
 ## Sessions (auto-session)
 
