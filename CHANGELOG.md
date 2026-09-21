@@ -7,14 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-
-- `bufferline`: redesigned tabs — flush "pills" without separators, green
-  accent marker on the active tab, dimmed inactive tabs, yellow modified dot
-  and LSP diagnostics rendered inline (`E2`/`W1`…). Right-click closes the
-  tab under the cursor; the bar auto-hides with a single buffer, and the
-  neo-tree offset label is now a dimmed "File explorer".
-
 ## [0.7.1] - 2026-09-22
 
 ### Changed
