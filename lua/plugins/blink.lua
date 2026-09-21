@@ -1,8 +1,12 @@
 return {
 	"saghen/blink.cmp",
 	dependencies = {
+		"saghen/blink.lib",
 		"rafamadriz/friendly-snippets",
 	},
+	build = function()
+		require("blink.cmp").build():pwait()
+	end,
 	config = function()
 		require("blink.cmp").setup({
 			appearance = {
@@ -37,7 +41,9 @@ return {
 			},
 			keymap = {
 				preset = "none",
+				-- Some terminals swallow <C-space>; Ctrl+/ is the common fallback.
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+				["<C-/>"] = { "show", "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide" },
 				["<CR>"] = { "accept", "fallback" },
 				["<Tab>"] = { "select_next", "fallback" },
