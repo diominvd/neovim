@@ -16,7 +16,8 @@ Complete, up-to-date keybinding reference for this configuration.
 * `]d` means: press `]`, then `d`.
 * All mappings are `noremap` and `silent` unless noted otherwise.
 * LSP and gitsigns mappings are **buffer-local** — they only exist while an LSP
-  client / gitsigns is attached to the current buffer.
+  client / gitsigns is attached to the current buffer. The only exception is
+  `K` (hover), which is global so it works in any buffer.
 * The safest way to explore is pressing `<Space>` and following which-key groups.
 
 ## Leader Groups (which-key)
@@ -120,7 +121,7 @@ Active only while an LSP server is attached to the buffer.
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `K` | n | Hover + diagnostics combined window (opens anywhere, forces) |
+| `K` | n | Hover + diagnostics combined window (global; works without LSP too) |
 | `gK` | n | Signature help |
 | `gd` | n | Go to definition |
 | `gr` | n | Find references |

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `K` (hover) is now a global mapping instead of a buffer-local one set on
+  `LspAttach`. In a buffer without an attached LSP client the built-in `K` fell
+  through to `keywordprg` (`:Man`) and errored with
+  `man.lua: executable not found: "man"` when the `man` binary is not installed.
+
 ## [0.7.2] - 2026-10-11
 
 ### Added

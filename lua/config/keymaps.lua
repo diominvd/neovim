@@ -211,13 +211,17 @@ map("n", "<leader>Q", function()
 end, "Delete session and quit")
 
 ---------- LSP ----------
+-- Global mapping so `K` also works in buffers without an attached LSP client.
+-- Otherwise it falls through to the built-in `K` -> `keywordprg` (`:Man`) and
+-- errors when the `man` binary is not installed.
+map("n", "K", function()
+  require("utils.hover").combined_hover({ focusable = true })
+end, "Hover + diagnostics")
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf
 
-    map("n", "K", function()
-      require("utils.hover").combined_hover({ focusable = true })
-    end, { buffer = bufnr, desc = "Hover + diagnostics" })
     map("n", "gK", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP signature help" })
     map("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP signature help" })
     map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
