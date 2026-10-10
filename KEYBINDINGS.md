@@ -33,9 +33,11 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<Space>i` | Inlay |
 | `<Space>m` | Markdown |
 | `<Space>M` | Mason |
+| `<Space>o` | Opencode (AI) |
 | `<Space>q` | Quit / Session |
 | `<Space>r` | Refactor |
 | `<Space>s` | Split |
+| `<Space>sk` | Sidekick (AI) |
 | `<Space>t` | Terminal |
 | `<Space>u` | Undo / Format |
 | `<Space>x` | Diagnostics / Trouble |
@@ -208,6 +210,58 @@ works in the command line (`:`) — use `<Tab>` to accept there.
 | --- | --- | --- |
 | `<Space>t` | n | Toggle the bottom-anchored floating terminal (confined to the editor area) |
 | `<Space>gg` | n | Open lazygit fullscreen (requires the `lazygit` binary) |
+
+## Debugging (DAP)
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<Space>db` | n | Toggle breakpoint |
+| `<Space>dc` | n | Continue / start debug |
+| `<Space>dso` | n | Step over |
+| `<Space>dsi` | n | Step into |
+| `<Space>dui` | n | Toggle debug UI (dap-ui) |
+| `<Space>deb` | n | Show breakpoints panel |
+| `<Space>dev` | n | Evaluate expression |
+
+## Testing (Neotest)
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<Space>tr` | n | Run nearest test |
+| `<Space>tf` | n | Run all tests in current file |
+| `<Space>td` | n | Debug nearest test |
+| `<Space>ts` | n | Toggle test summary panel |
+| `<Space>to` | n | Open test output (enter to close) |
+
+## AI — Opencode
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<Space>oa` | n | Ask OpenCode (with buffer context) |
+| `<Space>os` | v | Send visual selection to OpenCode |
+| `<Space>ot` | n | Toggle OpenCode window |
+| `<Space>on` | n | Start new OpenCode session |
+
+## AI — Sidekick
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<Space>sk` | n | Open Sidekick |
+| `<Space>sc` | n | Open Sidekick CLI (opencode/claude/codex) |
+| `<Space>sn` | n | New Sidekick session |
+
+## Git Diff (Diffview)
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<Space>do` | n | Open diff view |
+| `<Space>dh` | n | Open file history |
+
+## Search & Replace (Grug-far)
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<Space>fr` | n | Open project-wide search and replace |
 
 ## Folding
 

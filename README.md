@@ -46,9 +46,14 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
   first key is inserted immediately).
 * Undotree — visual history of changes (`<Space>uu`).
 * Mini.surround — surround editing (`gsa` / `gsd` / `gsr`).
-* Snacks (indent + scroll + word references + terminal) — indent guides, a
-  scrollbar, reference highlighting and a bottom-anchored floating terminal
-  (`<Space>t`) confined to the editor area, nothing else enabled.
+* Snacks (indent + scroll + word references + terminal + dashboard + statuscolumn + gitbrowse + zen + bufdelete + rename + bigfile) — indent guides, a scrollbar, reference highlighting, a bottom-anchored floating terminal (`<Space>t`) confined to the editor area, a startup dashboard, statuscolumn, and more.
+* DAP (debugging) — `nvim-dap` + `nvim-dap-ui` + `nvim-dap-virtual-text` with Python (debugpy) and Node.js (node2) adapters via `mason-nvim-dap`.
+* Testing — `neotest` with Python (`neotest-python`) and Vitest (`neotest-vitest`) adapters.
+* AI integration — `opencode.nvim` (OpenCode native integration) and `sidekick.nvim` (Copilot NES + AI CLI terminal).
+* Linting — `nvim-lint` (ESLint, Ruff, fixjson).
+* Git diff — `diffview.nvim` for side-by-side diffs and merge conflicts.
+* Project-wide search/replace — `grug-far.nvim`.
+* IDE polish — `mini.icons` (replaces devicons), `guess-indent.nvim` (auto-detect tabs/spaces), `fidget.nvim` (LSP progress), `tiny-inline-diagnostic.nvim` (modern inline diagnostics), `nvim-lsp-file-operations` (auto-update imports on rename/move).
 * Noice / Trouble / Todo-comments.
 * Telescope-ui-select — `vim.ui.select` themed with Telescope.
 * Smart search — `ignorecase` + `smartcase`, live `:s` preview.
@@ -132,7 +137,19 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
     │   ├── autopairs.lua
     │   ├── surround.lua
     │   ├── undotree.lua
-    │   └── snacks.lua
+    │   ├── snacks.lua
+    │   ├── dap.lua
+    │   ├── neotest.lua
+    │   ├── opencode.lua
+    │   ├── sidekick.lua
+    │   ├── lint.lua
+    │   ├── diffview.lua
+    │   ├── grug-far.lua
+    │   ├── fidget.lua
+    │   ├── tiny-inline-diagnostic.lua
+    │   ├── mini-icons.lua
+    │   ├── guess-indent.lua
+    │   └── lsp-file-operations.lua
     ├── utils/
     │   └── hover.lua
     └── appearance/
@@ -148,6 +165,7 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
 * `ripgrep`, `fd`
 * `make` / C compiler
 * `lazygit` (optional — `<Space>gg` notifies until it is installed)
+* `opencode` (optional — AI agent, used by `opencode.nvim` and `sidekick.nvim`)
 
 ## Installation
 
@@ -173,9 +191,11 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 | `<Space>i` | Inlay |
 | `<Space>m` | Markdown |
 | `<Space>M` | Mason |
+| `<Space>o` | Opencode (AI) |
 | `<Space>q` | Quit / Session |
 | `<Space>r` | Refactor |
 | `<Space>s` | Split |
+| `<Space>sk` | Sidekick (AI) |
 | `<Space>t` | Terminal |
 | `<Space>u` | Undo / Format |
 | `<Space>x` | Diagnostics / Trouble |

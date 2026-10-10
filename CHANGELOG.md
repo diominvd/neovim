@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.7.4] - 2026-10-11
 
+### Added
+
+- **DAP (debugging)**: `nvim-dap` + `nvim-dap-ui` + `nvim-dap-virtual-text` with Python (debugpy) and Node.js (node2) adapters via `mason-nvim-dap`. Keymaps: `<leader>db` (breakpoint), `<leader>dc` (continue), `<leader>dso` (step over), `<leader>dsi` (step into), `<leader>dui` (UI toggle).
+- **Testing**: `neotest` with Python (`neotest-python`) and Vitest (`neotest-vitest`) adapters. Keymaps: `<leader>tr` (run nearest), `<leader>tf` (run file), `<leader>td` (debug nearest), `<leader>ts` (summary), `<leader>to` (output).
+- **AI integration**: `opencode.nvim` (OpenCode native integration) and `sidekick.nvim` (Copilot NES + AI CLI terminal). Keymaps: `<leader>oa`/`<leader>os`/`<leader>ot`/`<leader>on` (opencode), `<leader>sk`/`<leader>sc`/`<leader>sn` (sidekick).
+- **Linting**: `nvim-lint` with ESLint for JS/TS/React/CSS/HTML, Ruff for Python, fixjson for JSON.
+- **Git diff**: `diffview.nvim` for side-by-side diffs and merge conflicts. Keymaps: `<leader>do` (open), `<leader>dh` (file history).
+- **Project-wide search/replace**: `grug-far.nvim` with `<leader>fr`.
+- **IDE polish**: `mini.icons` (replaces devicons), `guess-indent.nvim` (auto-detect tabs/spaces), `fidget.nvim` (LSP progress), `tiny-inline-diagnostic.nvim` (modern inline diagnostics), `nvim-lsp-file-operations` (auto-update imports on rename/move).
+- **snacks.nvim** expanded: dashboard, statuscolumn, gitbrowse, zen, bufdelete, rename, bigfile modules enabled.
+- **Core options**: `confirm = true`, `splitkeep = "screen"`.
+
+### Changed
+
+- LSP capabilities now include `didChangeWatchedFiles` for file-operation notifications.
+
+### Fixed
+
+- Disabled built-in `virtual_text` diagnostics in favor of `tiny-inline-diagnostic`.
+
+## [0.7.3] - 2026-10-11
+
 ## [0.7.3] - 2026-10-11
 
 ### Fixed
