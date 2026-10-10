@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.3] - 2026-10-11
+
 ### Fixed
 
 - `K` (hover) is now a global mapping instead of a buffer-local one set on
