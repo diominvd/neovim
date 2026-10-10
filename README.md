@@ -21,7 +21,11 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * lazy.nvim — lazy-loading, optimised startup.
 * Which-key — discoverable leader bindings.
 * LSP via mason.nvim + nvim-lspconfig (Lua, Python, JSON, TypeScript/React, CSS, HTML).
-* Blink.cmp — autocompletion.
+* Blink.cmp — autocompletion (auto-documentation, signature help, ghost text,
+  command-line completion) plus `lazydev` smart completions for this config's Lua.
+* Code actions with a diff preview (`<Space>ca`, actions-preview).
+* Word-reference highlight + navigation (`]]` / `[[`, snacks.words) and a file
+  outline (`<Space>cs`, Trouble symbols).
 * Telescope — fuzzy finder (files, grep, buffers).
 * Treesitter — syntax highlighting, text objects.
 * Neo-tree — file explorer with git integration. Folders stay open while you
@@ -42,9 +46,9 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
   first key is inserted immediately).
 * Undotree — visual history of changes (`<Space>uu`).
 * Mini.surround — surround editing (`gsa` / `gsd` / `gsr`).
-* Snacks (indent + scroll + terminal) — indent guides, a scrollbar and a
-  bottom-anchored floating terminal (`<Space>t`) confined to the editor area,
-  nothing else enabled.
+* Snacks (indent + scroll + word references + terminal) — indent guides, a
+  scrollbar, reference highlighting and a bottom-anchored floating terminal
+  (`<Space>t`) confined to the editor area, nothing else enabled.
 * Noice / Trouble / Todo-comments.
 * Telescope-ui-select — `vim.ui.select` themed with Telescope.
 * Smart search — `ignorecase` + `smartcase`, live `:s` preview.
@@ -108,6 +112,8 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
     │   ├── treesitter.lua
     │   ├── telescope.lua
     │   ├── blink.lua
+    │   ├── lazydev.lua
+    │   ├── actions-preview.lua
     │   ├── neo-tree.lua
     │   ├── bufferline.lua
     │   ├── lualine.lua

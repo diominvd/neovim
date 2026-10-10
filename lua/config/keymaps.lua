@@ -123,6 +123,22 @@ map("n", "[e", function()
   vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
 end, "Prev error")
 
+---------- References (word under cursor) ----------
+-- snacks.words highlights every occurrence of the word under the cursor;
+-- these jump between the highlighted references.
+map("n", "]]", function()
+  require("snacks.words").jump(vim.v.count1)
+end, "Next reference")
+map("n", "[[", function()
+  require("snacks.words").jump(-vim.v.count1)
+end, "Prev reference")
+map("n", "<a-n>", function()
+  require("snacks.words").jump(vim.v.count1, true)
+end, "Next reference (cyclic)")
+map("n", "<a-p>", function()
+  require("snacks.words").jump(-vim.v.count1, true)
+end, "Prev reference (cyclic)")
+
 ---------- Formatting ----------
 map("n", "<leader>fmt", function()
   require("conform").format({
@@ -202,6 +218,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "K", function()
       require("utils.hover").combined_hover({ focusable = true })
     end, { buffer = bufnr, desc = "Hover + diagnostics" })
+    map("n", "gK", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP signature help" })
     map("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP signature help" })
     map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
     map("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Find references" })
@@ -209,7 +226,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "gy", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Go to type definition" })
     map("n", "gI", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to implementation" })
     map("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename symbol" })
-    map("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code action" })
     map("n", "<leader>ih", function()
       local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
       vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })

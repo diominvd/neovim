@@ -121,15 +121,24 @@ Active only while an LSP server is attached to the buffer.
 | Key | Mode | Action |
 | --- | --- | --- |
 | `K` | n | Hover + diagnostics combined window (opens anywhere, forces) |
+| `gK` | n | Signature help |
 | `gd` | n | Go to definition |
 | `gr` | n | Find references |
 | `gD` | n | Go to declaration |
 | `gy` | n | Go to type definition |
 | `gI` | n | Go to implementation |
 | `<Space>rn` | n | Rename symbol |
-| `<Space>ca` | n | Code action |
+| `<Space>ca` | n, v | Code action with diff preview (actions-preview) |
 | `<Space>ih` | n | Toggle inlay hints |
 | `<C-k>` | i | Signature help |
+
+Reference navigation — highlights every occurrence of the word under the cursor
+(`snacks.words`):
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `]]` / `[[` | n | Next / previous occurrence of the word under the cursor |
+| `<a-n>` / `<a-p>` | n | Next / previous occurrence (wraps around) |
 
 ## Diagnostics
 
@@ -139,6 +148,7 @@ Active only while an LSP server is attached to the buffer.
 | `]e` / `[e` | n | Next / previous error only |
 | `<Space>xx` | n | Toggle project diagnostics (Trouble) |
 | `<Space>xb` | n | Toggle buffer diagnostics (Trouble) |
+| `<Space>cs` | n | Toggle file outline / symbols (Trouble) |
 | `<Space>xq` | n | Toggle quickfix list (Trouble) |
 
 ## Comments
@@ -178,12 +188,18 @@ Move (next / previous):
 | Key | Action |
 | --- | --- |
 | `<C-space>` | Show completion / documentation |
+| `<C-n>` / `<C-p>` | Select next / previous item |
+| `<C-y>` | Accept the selected item |
 | `<C-e>` | Hide completion |
 | `<CR>` | Accept selected item (falls back to newline if none) |
 | `<Tab>` | Select next item (falls back to tab) |
 | `<S-Tab>` | Select previous item (falls back to tab) |
 | `<C-b>` | Scroll documentation up |
 | `<C-f>` | Scroll documentation down |
+
+Documentation for the highlighted candidate opens automatically (after ~200 ms),
+and a signature-help popup appears while a call is being typed. Completion also
+works in the command line (`:`) — use `<Tab>` to accept there.
 
 ## Terminal
 

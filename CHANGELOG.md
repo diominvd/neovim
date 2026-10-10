@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- IDE-grade hints and completion:
+  - `lazydev.nvim` — smart completions for the Neovim API while editing this
+    config's Lua files (registered as a `blink` source for the `lua` filetype).
+  - `actions-preview.nvim` — `<leader>ca` previews code actions (diff before /
+    after) in a Telescope picker before applying; also available in visual mode.
+  - Word-reference highlighting and navigation via `snacks.words`:
+    `]]` / `[[` / `<a-n>` / `<a-p>`.
+  - File outline — `<leader>cs` opens Trouble symbols.
+- `blink.cmp`: command-line completion (`:`) and `<C-y>` (accept) /
+  `<C-n>` / `<C-p>` (next / previous candidate).
+
+### Changed
+
+- `blink.cmp`: auto-shown documentation (200 ms), signature-help popup while
+  typing a call, ghost text, treesitter-highlighted menu labels, and explicit
+  auto-brackets on accept.
+- LSP: `gK` opens signature help in normal mode (in addition to `<C-k>` in
+  insert mode).
+
 ### Fixed
 
 - `mason.nvim`: `:Mason` again works directly — the plugin was lazy-loaded
