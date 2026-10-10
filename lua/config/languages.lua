@@ -2,7 +2,7 @@
 --
 -- One entry per language. LSP servers, formatters and treesitter parsers are
 -- enabled from here. Treesitter parsers auto-install on startup; the LSP
--- servers and formatters are installed once with :MasonInstallAll
+-- servers and formatters are installed once with :MasonToolsInstall
 -- (<leader>Mi) — nothing else needs touching when a language is added.
 --
 --   enabled    toggle the whole language on/off (false = disabled)

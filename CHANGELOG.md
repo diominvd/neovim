@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `mason.nvim`: `:Mason` again works directly — the plugin was lazy-loaded
+  only via `<leader>M` keymaps, so the command did not exist until one of them
+  was pressed. Added `cmd = { "Mason", ... }` to keep the plugin lazy while
+  restoring the commands.
+- `mason-tool-installer`: `<leader>Mi` (`:MasonInstallAll`) pointed to a
+  command renamed upstream to `:MasonToolsInstall`; the keybind now uses the
+  current name (`:MasonInstallAll` produced `E492`).
+
 ## [0.7.1] - 2026-09-22
 
 ### Changed
@@ -15,9 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `build = require("blink.cmp").build():pwait()` step and the `blink.lib`
   dependency (the native fuzzy matcher is built from source); `<C-/>` mirrors
   `<C-space>` for terminals that swallow it.
-- `mason.nvim`: new `<leader>M` group — `<leader>Mi` (`:MasonInstallAll`) and
+- `mason.nvim`: new `<leader>M` group — `<leader>Mi` (`:MasonToolsInstall`) and
   `<leader>Mo` (`:Mason`). LSP servers and formatters are now installed
-  explicitly with `:MasonInstallAll` after adding a language (treesitter
+  explicitly with `:MasonToolsInstall` after adding a language (treesitter
   parsers still auto-install on startup; `run_on_start = false` stays for
   fast startups).
 - `---` inserts an em-dash only in prose filetypes (`text`, `tex`, `rst`),
