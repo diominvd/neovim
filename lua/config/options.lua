@@ -42,3 +42,9 @@ opt.backup = false
 opt.undofile = true
 opt.updatetime = 250
 opt.timeoutlen = 300
+
+-- Confirm exit with unsaved changes
+opt.confirm = true
+
+-- Keep screen position when splitting windows
+opt.splitkeep = "screen"
