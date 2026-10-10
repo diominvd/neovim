@@ -10,7 +10,17 @@ return {
 		})
 
 		vim.lsp.config("*", {
-			capabilities = require("blink.cmp").get_lsp_capabilities(),
+			capabilities = vim.tbl_deep_extend(
+				"force",
+				require("blink.cmp").get_lsp_capabilities(),
+				{
+					workspace = {
+						didChangeWatchedFiles = {
+							dynamicRegistration = true,
+						},
+					},
+				}
+			),
 		})
 
 		vim.lsp.config("lua_ls", {
