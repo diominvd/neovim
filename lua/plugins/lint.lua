@@ -1,9 +1,10 @@
-{
+return {
 	"mfussenegger/nvim-lint",
-	event = { "BufWritePost", "BufReadPost", "InsertLeave" },
+	ft = { "python", "javascript", "typescript", "typescriptreact", "javascriptreact", "css", "html", "json", "jsonc" },
 	config = function()
-		require("lint").try_lint()
-		require("lint").linters_by_ft = {
+		local lint = require("lint")
+
+		lint.linters_by_ft = {
 			python = { "ruff" },
 			javascript = { "eslint" },
 			typescript = { "eslint" },
@@ -12,6 +13,13 @@
 			css = { "eslint" },
 			html = { "eslint" },
 			json = { "fixjson" },
+			jsonc = { "fixjson" },
 		}
+
+		vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+			callback = function()
+				lint.try_lint()
+			end,
+		})
 	end,
 }

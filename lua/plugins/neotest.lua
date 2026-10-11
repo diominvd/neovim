@@ -1,5 +1,6 @@
-{
+return {
 	"nvim-neotest/neotest",
+	cmd = { "Neotest" },
 	dependencies = {
 		"nvim-neotest/nvim-nio",
 		"nvim-neotest/neotest-python",
@@ -32,10 +33,10 @@
 		})
 	end,
 	keys = {
-		{ "<leader>tr", "<cmd>lua require('neotest').run.run()<cr>", desc = "Run nearest test" },
-		{ "<leader>tf", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", desc = "Run file tests" },
-		{ "<leader>td", "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", desc = "Debug nearest test" },
-		{ "<leader>ts", "<cmd>lua require('neotest').summary.toggle()<cr>", desc = "Test summary" },
-		{ "<leader>to", "<cmd>lua require('neotest').output.open({ enter = true })<cr>", desc = "Test output" },
+		{ "<leader>tr", "<cmd>Neotest run nearest<cr>", desc = "Run nearest test" },
+		{ "<leader>tf", "<cmd>Neotest run file<cr>", desc = "Run file tests" },
+		{ "<leader>td", "<cmd>Neotest run dap<cr>", desc = "Debug nearest test" },
+		{ "<leader>ts", "<cmd>Neotest summary<cr>", desc = "Test summary" },
+		{ "<leader>to", "<cmd>Neotest output<cr>", desc = "Test output" },
 	},
 }

@@ -1,39 +1,35 @@
-{
+return {
 	"folke/sidekick.nvim",
 	enabled = true,
-	cmd = { "Sidekick", "SidekickOpen", "SidekickClose", "SidekickToggle" },
+	cmd = { "Sidekick" },
+	ft = { "lua", "python", "javascript", "typescript", "typescriptreact", "javascriptreact" },
+	-- stylua: ignore
 	keys = {
-		{ "<leader>sk", "<cmd>Sidekick<cr>", desc = "Sidekick" },
-		{ "<leader>sc", "<cmd>SidekickCli<cr>", desc = "Sidekick CLI" },
-		{ "<leader>sn", "<cmd>SidekickNew<cr>", desc = "Sidekick New" },
+		-- Universal focus / toggle, works in normal, insert, terminal and visual mode.
+		{ "<c-.>", function() require("sidekick.cli").focus() end, mode = { "n", "i", "t", "x" }, desc = "Sidekick Focus" },
+		{ "<leader>aa", function() require("sidekick.cli").toggle() end, desc = "Sidekick Toggle CLI" },
+		{ "<leader>as", function() require("sidekick.cli").select() end, desc = "Select CLI Tool" },
+		{ "<leader>at", function() require("sidekick.cli").send({ msg = "{this}" }) end, mode = { "n", "x" }, desc = "Send This" },
+		{ "<leader>av", function() require("sidekick.cli").send({ msg = "{selection}" }) end, mode = "x", desc = "Send Selection" },
+		{ "<leader>af", function() require("sidekick.cli").send({ msg = "{file}" }) end, desc = "Send File" },
+		{ "<leader>ap", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Select Prompt" },
+		-- The AI agent used outside of the editor: launched directly in a terminal.
+		{ "<leader>ao", function() require("sidekick.cli").toggle({ name = "opencode", focus = true }) end, desc = "Sidekick OpenCode" },
 	},
 	opts = {
-		-- CLI integrations
 		cli = {
-			-- opencode (your AI agent)
+			-- The AI agent available from the terminal.
+			-- Requires the `opencode` binary in PATH; detected automatically.
 			opencode = {
 				enabled = true,
-				-- Path to opencode binary
-				-- cmd = "opencode",
-			},
-			-- Claude Code
-			claude = {
-				enabled = false,
-			},
-			-- Codex
-			codex = {
-				enabled = false,
-			},
-			-- Gemini
-			gemini = {
-				enabled = false,
+				cmd = { "opencode" },
 			},
 		},
-		-- Next Edit Suggestions (NES) from Copilot LSP
+		-- Next Edit Suggestions come from the Copilot LSP server, which is not
+		-- configured here. Kept off so sidekick never tries to run it.
 		nes = {
-			enabled = false, -- enable if you have Copilot
+			enabled = false,
 		},
-		-- Terminal
 		terminal = {
 			enabled = true,
 			win = {

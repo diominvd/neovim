@@ -7,18 +7,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **All `lua/plugins/*.lua` specs added in v0.7.4 were inert.** They were written
+  as bare tables without the leading `return`, so `lazy.nvim` never discovered
+  them — the 12 new plugins were silently absent (the config reported 39 plugins
+  instead of 52). Every spec now returns its table.
+- **`opencode.nvim` never loaded.** It registers no Neovim commands and the spec
+  called a non-existent `require("opencode").setup()`, so `config` errored with
+  `attempt to call field 'setup' (a nil value)`. Replaced with the real
+  `vim.g.opencode_opts` table and the public API (`ask`, `select`, `operator`,
+  `prompt`), which also brings the `@this` / `@buffer` / `@diagnostics` contexts
+  that were previously advertised but unavailable.
+- **`sidekick.nvim` keys pointed at commands that do not exist**
+  (`SidekickOpen`, `SidekickClose`, `SidekickCli`, `SidekickNew`) — they only
+  errored `E492`. Rebound to the plugin's Lua API, and moved off `<leader>s…`,
+  which collided with the `<leader>s` (Split) group.
+- **`neotest` keys called a non-existent command.** `NeotestRun` does not exist;
+  the plugin exposes `:Neotest <subcommand>` (`run nearest`, `summary`, …).
+- **`nvim-dap-ui` refused to start** with `size: expected number, got nil` — the
+  table used `width`/`height` per layout instead of the required `size`.
+- **Duplicate DAP keymap.** `<leader>dso` was defined twice (step over *and*
+  step out), so one of them silently won. Stepping is now `d` + `i`/`o`/`O`.
+- **`<leader>d` group collided with Diffview.** `<leader>do` was Diffview's
+  "open", and DAP needed the same keys for stepping. Diffview moved to
+  `<leader>gv` / `<leader>gh`.
+- **Duplicate lint autocmd.** `lua/config/options.lua` registered the same
+  `BufWritePost` → `lint.try_lint()` handler that already lives in
+  `lua/plugins/lint.lua`, linting twice per save. The one in `options.lua` is
+  gone.
+- **Snacks `dashboard` config was invalid** (a `preset` made of a made-up
+  `header`/`buttons` shape) and would have replaced the deliberate
+  neo-tree-at-startup behaviour. Removed; the other new modules were given
+  their real option names (`bigfile` accepts `size`/`line_length`, not a nested
+  `opts` table).
+- Removed a `grug-far` `cond` guard that hid the plugin when `rg` was missing —
+  grug-far already reports that itself, and the guard made the command vanish
+  without explanation.
+
+### Added
+
+- New which-key groups: `<leader>a` (Assist / Sidekick), `<leader>d` (Debug),
+  `<leader>o` (Opencode).
+- Snacks: `statuscolumn`, `gitbrowse`, `zen`, `bufdelete` and `rename` with
+  keys (`<leader>gz`, `<leader>gr`, `<leader>bd`).
+- `KEYBINDINGS.md` documents all the above, including the contexts accepted by
+  OpenCode and the fact that both AI plugins use the `opencode` binary.
+
 ## [0.7.4] - 2026-10-11
 
 ### Added
 
-- **DAP (debugging)**: `nvim-dap` + `nvim-dap-ui` + `nvim-dap-virtual-text` with Python (debugpy) and Node.js (node2) adapters via `mason-nvim-dap`. Keymaps: `<leader>db` (breakpoint), `<leader>dc` (continue), `<leader>dso` (step over), `<leader>dsi` (step into), `<leader>dui` (UI toggle).
-- **Testing**: `neotest` with Python (`neotest-python`) and Vitest (`neotest-vitest`) adapters. Keymaps: `<leader>tr` (run nearest), `<leader>tf` (run file), `<leader>td` (debug nearest), `<leader>ts` (summary), `<leader>to` (output).
-- **AI integration**: `opencode.nvim` (OpenCode native integration) and `sidekick.nvim` (Copilot NES + AI CLI terminal). Keymaps: `<leader>oa`/`<leader>os`/`<leader>ot`/`<leader>on` (opencode), `<leader>sk`/`<leader>sc`/`<leader>sn` (sidekick).
-- **Linting**: `nvim-lint` with ESLint for JS/TS/React/CSS/HTML, Ruff for Python, fixjson for JSON.
-- **Git diff**: `diffview.nvim` for side-by-side diffs and merge conflicts. Keymaps: `<leader>do` (open), `<leader>dh` (file history).
-- **Project-wide search/replace**: `grug-far.nvim` with `<leader>fr`.
-- **IDE polish**: `mini.icons` (replaces devicons), `guess-indent.nvim` (auto-detect tabs/spaces), `fidget.nvim` (LSP progress), `tiny-inline-diagnostic.nvim` (modern inline diagnostics), `nvim-lsp-file-operations` (auto-update imports on rename/move).
-- **snacks.nvim** expanded: dashboard, statuscolumn, gitbrowse, zen, bufdelete, rename, bigfile modules enabled.
+- **DAP (debugging)**: `nvim-dap` + `nvim-dap-ui` + `nvim-dap-virtual-text` with Python (`debugpy`) and Node.js (`node2`) adapters, installed by `mason-nvim-dap`.
+- **Testing**: `neotest` with pytest (`neotest-python`) and Vitest (`neotest-vitest`) adapters.
+- **AI integration**: `opencode.nvim` (context injection, diff review, event hooks) and `sidekick.nvim` (any AI CLI in a terminal).
+- **Linting**: `nvim-lint` — ESLint for JS/TS/React/CSS/HTML, Ruff for Python, fixjson for JSON.
+- **Git diff**: `diffview.nvim` for side-by-side diffs and file history.
+- **Project-wide search/replace**: `grug-far.nvim`.
+- **IDE polish**: `mini.icons`, `guess-indent.nvim`, `fidget.nvim`, `tiny-inline-diagnostic.nvim`, `nvim-lsp-file-operations`.
+- **snacks.nvim** expanded with `statuscolumn`, `gitbrowse`, `zen`, `bufdelete`, `rename` and `bigfile`.
 - **Core options**: `confirm = true`, `splitkeep = "screen"`.
 
 ### Changed
@@ -29,7 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Disabled built-in `virtual_text` diagnostics in favor of `tiny-inline-diagnostic`.
 
-## [0.7.3] - 2026-10-11
+> ⚠️ This release was shipped with 12 inert plugin specs (see `[Unreleased]`
+> above) — none of the plugins above actually loaded until the fix below.
 
 ## [0.7.3] - 2026-10-11
 

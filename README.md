@@ -46,14 +46,14 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
   first key is inserted immediately).
 * Undotree — visual history of changes (`<Space>uu`).
 * Mini.surround — surround editing (`gsa` / `gsd` / `gsr`).
-* Snacks (indent + scroll + word references + terminal + dashboard + statuscolumn + gitbrowse + zen + bufdelete + rename + bigfile) — indent guides, a scrollbar, reference highlighting, a bottom-anchored floating terminal (`<Space>t`) confined to the editor area, a startup dashboard, statuscolumn, and more.
-* DAP (debugging) — `nvim-dap` + `nvim-dap-ui` + `nvim-dap-virtual-text` with Python (debugpy) and Node.js (node2) adapters via `mason-nvim-dap`.
-* Testing — `neotest` with Python (`neotest-python`) and Vitest (`neotest-vitest`) adapters.
-* AI integration — `opencode.nvim` (OpenCode native integration) and `sidekick.nvim` (Copilot NES + AI CLI terminal).
-* Linting — `nvim-lint` (ESLint, Ruff, fixjson).
-* Git diff — `diffview.nvim` for side-by-side diffs and merge conflicts.
-* Project-wide search/replace — `grug-far.nvim`.
-* IDE polish — `mini.icons` (replaces devicons), `guess-indent.nvim` (auto-detect tabs/spaces), `fidget.nvim` (LSP progress), `tiny-inline-diagnostic.nvim` (modern inline diagnostics), `nvim-lsp-file-operations` (auto-update imports on rename/move).
+* Snacks (indent + scroll + word references + terminal + statuscolumn + gitbrowse + zen + bufdelete + rename + bigfile) — indent guides, a scrollbar, reference highlighting, a bottom-anchored floating terminal (`<Space>t`) confined to the editor area, a richer status column, browser-open for git remotes, zen mode, safe buffer delete and graceful degradation on huge files.
+* **Debugging** — `nvim-dap` + `nvim-dap-ui` + `nvim-dap-virtual-text`, with Python (`debugpy`) and Node.js (`node2`) adapters installed by Mason. See [KEYBINDINGS › Debugging (DAP)](KEYBINDINGS.md#debugging-dap).
+* **Testing** — `neotest` with pytest and Vitest adapters, results streamed inline and summarised in a tree.
+* **AI** — `opencode.nvim` (context injection, diff review, event hooks — `<Space>o…`) and `sidekick.nvim` (any AI CLI in a terminal — `<Space>a…`). Both need the `opencode` binary in `$PATH`; they are independent, keep whichever you prefer.
+* **Linting** — `nvim-lint` (ESLint for JS/TS/CSS/HTML, Ruff for Python, fixjson for JSON) on save, next to the LSP diagnostics.
+* **Git diff** — `diffview.nvim` for side-by-side diffs, file history and merge conflicts.
+* **Project-wide search & replace** — `grug-far.nvim`.
+* **IDE polish** — `mini.icons` (replaces `nvim-web-devicons`), `guess-indent.nvim` (auto-detect tabs/spaces), `fidget.nvim` (LSP progress), `tiny-inline-diagnostic.nvim` (modern inline diagnostics), `nvim-lsp-file-operations` (auto-update imports when a file is renamed/moved).
 * Noice / Trouble / Todo-comments.
 * Telescope-ui-select — `vim.ui.select` themed with Telescope.
 * Smart search — `ignorecase` + `smartcase`, live `:s` preview.
@@ -126,6 +126,7 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
     │   ├── better-escape.lua
     │   ├── flash.lua
     │   ├── conform.lua
+    │   ├── lint.lua
     │   ├── gitsigns.lua
     │   ├── hardtime.lua
     │   ├── noice.lua
@@ -140,16 +141,15 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
     │   ├── snacks.lua
     │   ├── dap.lua
     │   ├── neotest.lua
+    │   ├── diffview.lua
     │   ├── opencode.lua
     │   ├── sidekick.lua
-    │   ├── lint.lua
-    │   ├── diffview.lua
-    │   ├── grug-far.lua
     │   ├── fidget.lua
     │   ├── tiny-inline-diagnostic.lua
     │   ├── mini-icons.lua
     │   ├── guess-indent.lua
-    │   └── lsp-file-operations.lua
+    │   ├── lsp-file-operations.lua
+    │   └── grug-far.lua
     ├── utils/
     │   └── hover.lua
     └── appearance/
@@ -184,7 +184,9 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 
 | Prefix | Group |
 | --- | --- |
+| `<Space>a` | Assist / Sidekick (AI) |
 | `<Space>c` | Code |
+| `<Space>d` | Debug (DAP) |
 | `<Space>f` | Find (Telescope) |
 | `<Space>g` | Git |
 | `<Space>h` | Help |
@@ -195,7 +197,6 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 | `<Space>q` | Quit / Session |
 | `<Space>r` | Refactor |
 | `<Space>s` | Split |
-| `<Space>sk` | Sidekick (AI) |
 | `<Space>t` | Terminal |
 | `<Space>u` | Undo / Format |
 | `<Space>x` | Diagnostics / Trouble |
@@ -206,6 +207,12 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 | --- | --- |
 | `<leader>w` / `<leader>W` | Save / save all and exit |
 | `<leader>ff` | Find files |
+| `<leader>fg` / `<leader>fr` | Search (read-only) / search & replace (grug-far) |
+| `<leader>gv` | Diff view of the working tree |
+| `<leader>oa` / `<leader>ot` | Ask OpenCode / toggle its terminal |
+| `<leader>aa` / `<leader>as` | Toggle the AI CLI (Sidekick) / pick the tool |
+| `<leader>dc` / `<leader>db` | Debug: continue / breakpoint |
+| `<leader>tr` / `<leader>tf` | Run nearest / current file tests |
 | `gd` / `gr` | Go to definition / references |
 | `]d` / `[d` | Next / previous diagnostic |
 | `<S-h>` / `<S-l>` | Previous / next buffer |

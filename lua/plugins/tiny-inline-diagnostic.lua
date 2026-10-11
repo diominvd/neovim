@@ -1,4 +1,4 @@
-{
+return {
 	"rachartier/tiny-inline-diagnostic.nvim",
 	event = "LspAttach",
 	priority = 1000,
@@ -8,8 +8,7 @@
 			options = {
 				right_align = true,
 				format = function(diagnostic)
-					local format = diagnostic.message:gsub("%s+$", "")
-					return format
+					return diagnostic.message:gsub("%s+$", "")
 				end,
 			},
 		})

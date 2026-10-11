@@ -26,7 +26,9 @@ Pressing `<Space>` shows a popup with every group and mapping.
 
 | Prefix | Group |
 | --- | --- |
+| `<Space>a` | Assist / Sidekick (AI) |
 | `<Space>c` | Code |
+| `<Space>d` | Debug (DAP) |
 | `<Space>f` | Find (Telescope) |
 | `<Space>g` | Git |
 | `<Space>h` | Help |
@@ -37,7 +39,6 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<Space>q` | Quit / Session |
 | `<Space>r` | Refactor |
 | `<Space>s` | Split |
-| `<Space>sk` | Sidekick (AI) |
 | `<Space>t` | Terminal |
 | `<Space>u` | Undo / Format |
 | `<Space>x` | Diagnostics / Trouble |
@@ -86,6 +87,7 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<S-h>` | n | Previous buffer |
 | `<S-l>` | n | Next buffer |
 | `<S-x>` | n | Close buffer (smart: jumps to the alternate/previous buffer first) |
+| `<Space>bd` | n | Delete the current buffer, keeping the window layout (snacks) |
 | `<S-p>` | n | Toggle buffer pin (Bufferline) |
 | `<A-h>` | n | Move buffer left (Bufferline) |
 | `<A-l>` | n | Move buffer right (Bufferline) |
@@ -103,6 +105,7 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<Space>ft` | n | Find TODOs / FIXMEs (todo-comments) |
 | `<Space>fk` | n | Show all keymaps |
 | `<Space>fs` | n | Search & restore sessions (auto-session) |
+| `<Space>fr` | n | Project-wide search & replace (grug-far) |
 
 ## Git
 
@@ -116,6 +119,11 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<Space>gc` | n | Browse git commits (Telescope) |
 | `<Space>gs` | n | Git status / changed files (Telescope) |
 | `<Space>gl` | n | Browse git branches (Telescope) |
+| `<Space>gv` | n | Diff view of the working tree (diffview) |
+| `<Space>gh` | n | Diff view of the current file history (diffview) |
+| `<Space>gr` | n | Open the remote repository in a browser (snacks.gitbrowse) |
+| `<Space>gz` | n | Zen mode — distraction-free window (snacks.zen) |
+| `<Space>gg` | n | Open lazygit fullscreen (requires the `lazygit` binary) |
 
 ## LSP
 
@@ -209,55 +217,96 @@ works in the command line (`:`) — use `<Tab>` to accept there.
 | Key | Mode | Action |
 | --- | --- | --- |
 | `<Space>t` | n | Toggle the bottom-anchored floating terminal (confined to the editor area) |
-| `<Space>gg` | n | Open lazygit fullscreen (requires the `lazygit` binary) |
 
 ## Debugging (DAP)
+
+Adapter selection is automatic: Python files use `debugpy`, JavaScript /
+TypeScript files use the `node2` adapter. Both are installed by Mason
+(`mason-nvim-dap`) the first time you open the debugger. Set the breakpoint
+before choosing *Run / Continue*.
 
 | Key | Mode | Action |
 | --- | --- | --- |
 | `<Space>db` | n | Toggle breakpoint |
-| `<Space>dc` | n | Continue / start debug |
-| `<Space>dso` | n | Step over |
-| `<Space>dsi` | n | Step into |
-| `<Space>dui` | n | Toggle debug UI (dap-ui) |
-| `<Space>deb` | n | Show breakpoints panel |
-| `<Space>dev` | n | Evaluate expression |
+| `<Space>dc` | n | Run / continue the session |
+| `<Space>di` | n | Step into |
+| `<Space>do` | n | Step out |
+| `<Space>dO` | n | Step over |
+| `<Space>dp` | n | Pause the running session |
+| `<Space>dr` | n | Toggle the REPL |
+| `<Space>dt` | n | Terminate the session |
+| `<Space>du` | n | Toggle the debug sidebar (scopes, stacks, watches, breakpoints) |
+| `<Space>de` | n, v | Evaluate the expression under the cursor (add it to the watches) |
+
+The sidebar opens automatically when a session starts and closes when it ends.
 
 ## Testing (Neotest)
 
-| Key | Mode | Action |
-| --- | --- | --- |
-| `<Space>tr` | n | Run nearest test |
-| `<Space>tf` | n | Run all tests in current file |
-| `<Space>td` | n | Debug nearest test |
-| `<Space>ts` | n | Toggle test summary panel |
-| `<Space>to` | n | Open test output (enter to close) |
-
-## AI — Opencode
+Tests run in a background terminal; results are streamed inline as virtual text.
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `<Space>oa` | n | Ask OpenCode (with buffer context) |
-| `<Space>os` | v | Send visual selection to OpenCode |
-| `<Space>ot` | n | Toggle OpenCode window |
-| `<Space>on` | n | Start new OpenCode session |
+| `<Space>tr` | n | Run the nearest test |
+| `<Space>tf` | n | Run every test in the current file |
+| `<Space>td` | n | Debug the nearest test (starts DAP instead of running it) |
+| `<Space>ts` | n | Toggle the test summary tree |
+| `<Space>to` | n | Open the output of the test under the cursor |
 
-## AI — Sidekick
+Adapters: `neotest-python` (pytest) and `neotest-vitest`. The results list opens
+in Trouble when available, otherwise in the quickfix list.
+
+## AI — Opencode (deep integration)
+
+`opencode.nvim` injects the editor context into your agent prompts. It
+communicates with the OpenCode server, so **`opencode` must be installed and in
+`$PATH`**. Without it the mappings notify an error instead of failing loudly.
+
+Contexts you can reference: `@this` (range or cursor), `@buffer`, `@buffers`,
+`@diagnostics`, `@marks`, `@quickfix`, `@visible`.
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `<Space>sk` | n | Open Sidekick |
-| `<Space>sc` | n | Open Sidekick CLI (opencode/claude/codex) |
-| `<Space>sn` | n | New Sidekick session |
+| `<Space>oa` | n, v | Ask OpenCode about the current range / cursor (`@this`) |
+| `<Space>oo` | n, v | Select from the built-in prompt menu |
+| `<Space>os` | n, v (operator) | Send a motion / selection to OpenCode — e.g. `g+osa` |
+| `<Space>ol` | n (operator) | Send the current line to OpenCode |
+| `<Space>ob` | n | Ask OpenCode about the whole buffer (`@buffer`) |
+| `<Space>od` | n | Ask OpenCode about the diagnostics |
+| `<Space>ot` | n, t | Toggle the OpenCode terminal (snacks float) |
+
+## AI — Sidekick (terminal hub)
+
+Sidekick wraps any AI CLI in a terminal. It is configured for **`opencode`**
+and needs the binary in `$PATH`; run selection only works while a CLI session
+is open (`<Space>as` first).
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<C-.>` | n, i, t, v | Focus / toggle the CLI window |
+| `<Space>aa` | n | Toggle the CLI window |
+| `<Space>as` | n | Select which CLI tool to open (opencode, claude, …) |
+| `<Space>ao` | n | Open OpenCode directly in a focused CLI window |
+| `<Space>at` | n, v | Send the current range to the CLI |
+| `<Space>av` | v | Send the selection to the CLI |
+| `<Space>af` | n | Send the current file to the CLI |
+| `<Space>ap` | n, v | Pick one of Sidekick's built-in prompts |
+
+> Both AI plugins control OpenCode. `opencode.nvim` (`<Space>o…`) is the
+> editor-integrated one (context, diff review, event hooks); Sidekick
+> (`<Space>a…`) is the plain terminal one. Keep whichever you prefer — disabling
+> the other only removes its keys.
 
 ## Git Diff (Diffview)
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `<Space>do` | n | Open diff view |
-| `<Space>dh` | n | Open file history |
+| `<Space>gv` | n | Open diff view of the whole working tree |
+| `<Space>gh` | n | Open diff view of the current file history |
 
 ## Search & Replace (Grug-far)
+
+`<Space>fg` (Telescope) is read-only search; grug-far is the interactive
+replace front-end over ripgrep.
 
 | Key | Mode | Action |
 | --- | --- | --- |

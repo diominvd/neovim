@@ -25,13 +25,16 @@ return {
 		})
 
 		wk.add({
+			{ "<leader>a", group = "Assist (Sidekick AI)" },
 			{ "<leader>c", group = "Code" },
+			{ "<leader>d", group = "Debug" },
 			{ "<leader>f", group = "Find" },
 			{ "<leader>g", group = "Git" },
 			{ "<leader>h", group = "Help" },
 			{ "<leader>i", group = "Inlay" },
 			{ "<leader>m", group = "Markdown" },
 			{ "<leader>M", group = "Mason" },
+			{ "<leader>o", group = "Opencode (AI)" },
 			{ "<leader>q", group = "Quit / Session" },
 			{ "<leader>r", group = "Refactor" },
 			{ "<leader>s", group = "Split" },

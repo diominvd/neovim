@@ -1,6 +1,13 @@
 return {
 	"folke/snacks.nvim",
 	main = "snacks",
+	priority = 1000,
+	-- stylua: ignore
+	keys = {
+		{ "<leader>gz", function() Snacks.zen() end, desc = "Zen Mode" },
+		{ "<leader>gr", function() Snacks.gitbrowse.open() end, desc = "Open Git in Browser" },
+		{ "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
+	},
 	opts = {
 		-- Only the visual helpers, word-references and the terminal are enabled;
 		-- the rest of snacks stays off.
@@ -22,51 +29,20 @@ return {
 				height = 0.35,
 			},
 		},
-		dashboard = {
-			enabled = true,
-			preset = {
-			-- Doesn't work for oasis mini.pick
-			-- lock = true,
-			-- The section between header and windows
-				header = {
-				{ "  Find file", icon = " ", key = "f", desc = "Find file" },
-				{ "  Recently files", icon = " ", key = "r", desc = "Recent files" },
-				{ "  Config", icon = " ", key = "c", desc = "Configuration" },
-				{ "󰒲  Lazy", icon = "󰒲 ", key = "l", desc = "Lazy" },
-				{ "  Quit", icon = " ", key = "q", desc = "Quit" },
-			},
-			-- The main body of the dashboard
-			buttons = {
-				{ "  Find file", icon = " ", key = "f", action = ":Telescope find_files" },
-				{ "  Recent files", icon = " ", key = "r", action = ":Telescope oldfiles" },
-				{ "  Config", icon = " ", key = "c", action = ":Lazy" },
-				{ "  Quit", icon = " ", key = "q", action = "qa" },
-			},
-			},
-		},
-		statuscolumn = {
-			enabled = true,
-		},
-		gitbrowse = {
-			enabled = true,
-		},
-		zen = {
-			enabled = true,
-		},
-		bufdelete = {
-			enabled = true,
-		},
-		rename = {
-			enabled = true,
-		},
+		-- Enrich the gutter column: folds, signs and diagnostics rendered by
+		-- snacks so the built-in signcolumn stays clean.
+		statuscolumn = { enabled = true },
+		-- Git helpers that work outside of lazygit.
+		gitbrowse = { enabled = true },
+		zen = { enabled = true },
+		bufdelete = { enabled = true },
+		rename = { enabled = true },
+		-- Gracefully degrade instead of stalling on huge files.
 		bigfile = {
 			enabled = true,
-			-- large file preview
-			opts = {
-				wrap = true,
-				signcolumn = false,
-				cursorline = false,
-			},
+			notify = true,
+			size = 1024 * 1024, -- 1MB before degrading
+			line_length = 500, -- average line length that counts as "minified"
 		},
 	},
 }

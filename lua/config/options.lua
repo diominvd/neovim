@@ -48,10 +48,3 @@ opt.confirm = true
 
 -- Keep screen position when splitting windows
 opt.splitkeep = "screen"
-
--- Run lint on save/buffer enter
-vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
-	callback = function()
-		require("lint").try_lint()
-	end,
-})
