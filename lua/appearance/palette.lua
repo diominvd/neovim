@@ -10,5 +10,7 @@ return {
 	red       = "#ea6962",
 	yellow    = "#d8a657",
 	green     = "#a9b665",
-	aqua      = "#7daea3",
+	acqua = "#7daea3",
+	guide         = "#665c54", -- indentation guides / tab markers (gray)
+	guide_active  = "#928374", -- guides of the current scope (brighter gray)
 }

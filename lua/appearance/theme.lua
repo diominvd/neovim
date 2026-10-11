@@ -27,6 +27,13 @@ return {
 			hi("PmenuSel", { bg = p.selection })
 			hi("PmenuBorder", { bg = "NONE", fg = p.border_fg })
 
+			-- Indentation guides (snacks.indent) and the markers drawn by
+			-- `listchars`: gray bars, with the scope the cursor sits in a
+			-- step brighter so nesting levels are easy to count.
+			hi("Whitespace", { fg = p.guide })
+			hi("SnacksIndent", { fg = p.guide })
+			hi("SnacksIndentScope", { fg = p.guide_active })
+
 			hi("BlinkCmpMenu", { bg = "NONE" })
 			hi("BlinkCmpMenuBorder", { bg = "NONE", fg = p.border_fg })
 			hi("BlinkCmpMenuSelection", { bg = p.selection })

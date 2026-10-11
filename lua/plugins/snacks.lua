@@ -2,16 +2,31 @@ return {
 	"folke/snacks.nvim",
 	main = "snacks",
 	priority = 1000,
-	-- stylua: ignore
-	keys = {
-		{ "<leader>gz", function() Snacks.zen() end, desc = "Zen Mode" },
-		{ "<leader>gr", function() Snacks.gitbrowse.open() end, desc = "Open Git in Browser" },
-		{ "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
-	},
+	-- NOTE: keep this plugin loaded at startup (no `keys` / `cmd` / `event` /
+	-- `ft`). Its modules are lazy by design — `indent`, `scroll` and `words`
+	-- attach themselves on `BufReadPost` / `UIEnter` / `LspAttach` *inside*
+	-- `Snacks.setup()`. Any lazy.nvim trigger here would defer `setup()` to a
+	-- keypress and silently disable every module. Related keymaps live in
+	-- `lua/config/keymaps.lua`.
 	opts = {
-		-- Only the visual helpers, word-references and the terminal are enabled;
-		-- the rest of snacks stays off.
-		indent = { enabled = true },
+		-- Indentation guides: one vertical bar per level. All guides stay gray,
+		-- while the scope the cursor is in is drawn brighter — see
+		-- `Whitespace` / `SnacksIndent*` in theme.lua.
+		indent = {
+			enabled = true,
+			indent = {
+				char = "│",
+				-- Guide every level at once; set to `true` to guide only the
+				-- scope the cursor is in.
+				only_scope = false,
+			},
+			scope = {
+				enabled = true,
+				char = "│",
+				underline = false,
+			},
+			chunk = { enabled = false },
+		},
 		scroll = { enabled = true },
 		-- Highlight all references of the word under the cursor (IDE-like)
 		-- and navigate them with ]] / [[ / <a-n> / <a-p>.

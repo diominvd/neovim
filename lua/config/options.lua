@@ -24,8 +24,10 @@ opt.winborder = "single"
 opt.wrap = false
 
 -- Visualize trailing whitespace and tabs (hidden by default).
+-- Tab stops are drawn as vertical bars so nesting levels stay readable
+-- instead of the `»` arrow; keep them gray via the `Whitespace` group.
 opt.list = true
-opt.listchars = { trail = "·", tab = "» " }
+opt.listchars = { trail = "·", tab = "│ " }
 
 -- Indentation Settings
 opt.tabstop = 2

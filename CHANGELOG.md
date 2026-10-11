@@ -53,6 +53,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `<leader>o` (Opencode).
 - Snacks: `statuscolumn`, `gitbrowse`, `zen`, `bufdelete` and `rename` with
   keys (`<leader>gz`, `<leader>gr`, `<leader>bd`).
+- **Vertical bars instead of `»` for tab stops.** `listchars.tab` is now
+  `│ ` so nesting is visible as columns. Indentation guides (`snacks.indent`)
+  are gray (`#665c54`) while the scope the cursor is in is brighter
+  (`#928374`); the `Whitespace` group uses the same gray for the tab markers.
+  Colors live in `appearance/palette.lua` (`guide` / `guide_active`).
 - `KEYBINDINGS.md` documents all the above, including the contexts accepted by
   OpenCode and the fact that both AI plugins use the `opencode` binary.
 

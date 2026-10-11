@@ -176,6 +176,18 @@ map("n", "<leader>t", function()
     },
   })
 end, "Toggle terminal")
+
+---------- Snacks helpers ----------
+map("n", "<leader>gz", function()
+  require("snacks").zen()
+end, "Zen mode")
+map("n", "<leader>gr", function()
+  require("snacks").gitbrowse.open()
+end, "Open git remote in browser")
+map("n", "<leader>bd", function()
+  require("snacks").bufdelete()
+end, "Delete buffer")
+
 map("n", "<leader>gg", function()
   if vim.fn.executable("lazygit") == 1 then
     require("snacks").lazygit({
