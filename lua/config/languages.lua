@@ -70,7 +70,7 @@ local languages = {
 
 -- Parsers needed regardless of the language list above: editing the config
 -- itself (vim/vimdoc), markdown (render-markdown) and helper parsers.
-local common_parsers = { "vim", "vimdoc", "markdown", "markdown_inline", "comment", "diff" }
+local common_parsers = { "vim", "vimdoc", "markdown", "markdown_inline", "comment", "diff", "regex" }
 
 -- Below: derived lists consumed by mason / lspconfig / conform / treesitter.
 -- No need to touch anything here.

@@ -10,7 +10,7 @@ if not vim.uv.fs_stat(lazypath) then
 		lazypath,
 	})
 	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_err_writeln("Failed to clone lazy.nvim:\n" .. vim.fn.system({ "git", "clone", lazyrepo, lazypath }))
+		vim.api.nvim_echo({ { "Failed to clone lazy.nvim:\n" .. vim.fn.system({ "git", "clone", lazyrepo, lazypath }), "ErrorMsg" } }, true, {})
 		return
 	end
 end
@@ -27,4 +27,6 @@ require("lazy").setup({
 	ui = {
 		border = "single",
 	},
+	-- No plugin here needs luarocks.
+	rocks = { enabled = false },
 })

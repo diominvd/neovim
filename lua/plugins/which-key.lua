@@ -38,7 +38,7 @@ return {
 			{ "<leader>q", group = "Quit / Session" },
 			{ "<leader>r", group = "Refactor" },
 			{ "<leader>s", group = "Split" },
-			{ "<leader>t", group = "Terminal" },
+			{ "<leader>t", group = "Test" },
 			{ "<leader>u", group = "Undo / Format" },
 			{ "<leader>x", group = "Diagnostics" },
 		})

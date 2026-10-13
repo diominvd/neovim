@@ -54,18 +54,10 @@ vim.api.nvim_create_autocmd({ "BufDelete", "BufWipeout" }, {
 	end,
 })
 
--- Display diagnostics and LSP hover in a single window.
--- Auto-opens only when the cursor is on an error/warning line; <K> forces it anywhere.
-vim.api.nvim_create_autocmd("CursorHold", {
-	callback = function()
-		require("utils.hover").combined_hover({ focusable = false, only_on_diagnostic = true })
-	end,
-})
-
 -- Briefly highlight the yanked region.
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 150 })
+		vim.hl.on_yank({ higroup = "IncSearch", timeout = 150 })
 	end,
 })
 
@@ -79,7 +71,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.foldmethod = "expr"
 		vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 		vim.opt_local.foldlevel = 99
-		vim.opt_local.foldlevelstart = 99
 	end,
 })
 

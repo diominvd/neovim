@@ -1,6 +1,11 @@
 local opt = vim.opt
 local g = vim.g
 
+-- Mason-installed tools (LSP servers, formatters, linters) must be on PATH
+-- before anything starts them; mason itself is lazy-loaded and would only add
+-- this on its first use.
+vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
+
 -- General Settings
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
@@ -50,3 +55,9 @@ opt.confirm = true
 
 -- Keep screen position when splitting windows
 opt.splitkeep = "screen"
+
+-- Sessions (auto-session) also restore window-local options.
+opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+-- Folds start open (treesitter folding is set per buffer in autocmds.lua).
+opt.foldlevelstart = 99

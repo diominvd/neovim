@@ -23,7 +23,7 @@ map("n", "<leader>hk", function()
 end, "Open keybinding reference")
 map("n", "<leader>hh", ":noh<CR>", "Clear search highlight")
 
-map({ "n", "v" }, "<leader>d", '"_d', "Delete to black hole")
+map({ "n", "v" }, "<leader>D", '"_d', "Delete to black hole")
 map("n", "<leader>y", "yy", "Yank line")
 map("v", "<leader>y", "y", "Yank selection")
 
@@ -114,13 +114,12 @@ map("n", "<leader>gl", function()
 end, "Git branches")
 
 ---------- Diagnostics ----------
-map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
-map("n", "[d", vim.diagnostic.goto_prev, "Prev diagnostic")
+-- `]d` / `[d` are built in (Neovim 0.11+); these jump between errors only.
 map("n", "]e", function()
-  vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+  vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })
 end, "Next error")
 map("n", "[e", function()
-  vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+  vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })
 end, "Prev error")
 
 ---------- References (word under cursor) ----------
@@ -168,7 +167,8 @@ local function main_editor_win()
   return vim.api.nvim_get_current_win()
 end
 
-map("n", "<leader>t", function()
+-- <C-\> toggles it from the editor and from inside the terminal.
+map({ "n", "t" }, "<C-\\>", function()
   require("snacks").terminal.toggle(nil, {
     win = {
       relative = "win",
@@ -230,18 +230,28 @@ map("n", "K", function()
   require("utils.hover").combined_hover({ focusable = true })
 end, "Hover + diagnostics")
 
+-- Built-in LSP keys of Neovim 0.11+ (`grn` rename, `gra` code action, `grr`
+-- references, `gri` implementation, `grt` type, `gO` symbols, `<C-s>`
+-- signature) stay as documented; the list-producing ones open in Telescope.
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf
+    local function picker(name)
+      return function()
+        require("telescope.builtin")[name]()
+      end
+    end
 
+    map("n", "gd", picker("lsp_definitions"), { buffer = bufnr, desc = "Go to definition" })
+    map("n", "grr", picker("lsp_references"), { buffer = bufnr, desc = "References" })
+    map("n", "gri", picker("lsp_implementations"), { buffer = bufnr, desc = "Implementations" })
+    map("n", "grt", picker("lsp_type_definitions"), { buffer = bufnr, desc = "Type definition" })
+    map("n", "gO", picker("lsp_document_symbols"), { buffer = bufnr, desc = "Symbols in file" })
+    map("n", "<leader>fS", picker("lsp_dynamic_workspace_symbols"), { buffer = bufnr, desc = "Symbols in project" })
+    map("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Go to declaration" })
     map("n", "gK", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP signature help" })
     map("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP signature help" })
-    map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
-    map("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Find references" })
-    map("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Go to declaration" })
-    map("n", "gy", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Go to type definition" })
-    map("n", "gI", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to implementation" })
-    map("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename symbol" })
+    map("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename symbol (same as grn)" })
     map("n", "<leader>ih", function()
       local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
       vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })

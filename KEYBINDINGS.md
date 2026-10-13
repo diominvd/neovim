@@ -39,7 +39,7 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<Space>q` | Quit / Session |
 | `<Space>r` | Refactor |
 | `<Space>s` | Split |
-| `<Space>t` | Terminal |
+| `<Space>t` | Test (Neotest) |
 | `<Space>u` | Undo / Format |
 | `<Space>x` | Diagnostics / Trouble |
 
@@ -52,7 +52,7 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<Space>qq` | n | Quit without saving |
 | `<Space>hk` | n | Open this reference (`KEYBINDINGS.md`) |
 | `<Space>hh` | n | Clear the search highlight (`:noh`) |
-| `<Space>d` | n, v | Delete to the black-hole register (`"_d`) — nothing is lost from `"` |
+| `<Space>D` | n, v | Delete to the black-hole register (`"_d`) — nothing is lost from `"` |
 | `<Space>y` | n | Yank line (`yy`) |
 | `<Space>y` | v | Yank the selection |
 | `<Space>uF` | n | Toggle auto-format on save (conform) |
@@ -127,21 +127,25 @@ Pressing `<Space>` shows a popup with every group and mapping.
 
 ## LSP
 
-Active only while an LSP server is attached to the buffer.
+Active only while an LSP server is attached to the buffer. The `gr*` keys are
+Neovim's own defaults (0.11+), so `:help lsp-defaults` and tutorials match;
+the ones that produce a list open it in Telescope.
 
 | Key | Mode | Action |
 | --- | --- | --- |
 | `K` | n | Hover + diagnostics combined window (global; works without LSP too) |
-| `gK` | n | Signature help |
-| `gd` | n | Go to definition |
-| `gr` | n | Find references |
+| `gd` | n | Go to definition (Telescope when there are several) |
+| `grr` | n | References (Telescope) |
+| `gri` | n | Implementations (Telescope) |
+| `grt` | n | Type definition (Telescope) |
+| `gO` | n | Symbols in the file (Telescope) |
+| `<Space>fS` | n | Symbols in the project (Telescope) |
+| `grn` / `<Space>rn` | n | Rename symbol |
+| `gra` | n, v | Code action (built in); `<Space>ca` — with diff preview |
 | `gD` | n | Go to declaration |
-| `gy` | n | Go to type definition |
-| `gI` | n | Go to implementation |
-| `<Space>rn` | n | Rename symbol |
-| `<Space>ca` | n, v | Code action with diff preview (actions-preview) |
+| `gK` | n | Signature help |
+| `<C-k>` / `<C-s>` | i | Signature help |
 | `<Space>ih` | n | Toggle inlay hints |
-| `<C-k>` | i | Signature help |
 
 Reference navigation — highlights every occurrence of the word under the cursor
 (`snacks.words`):
@@ -155,7 +159,7 @@ Reference navigation — highlights every occurrence of the word under the curso
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `]d` / `[d` | n | Next / previous diagnostic |
+| `]d` / `[d` | n | Next / previous diagnostic (built in) |
 | `]e` / `[e` | n | Next / previous error only |
 | `<Space>xx` | n | Toggle project diagnostics (Trouble) |
 | `<Space>xb` | n | Toggle buffer diagnostics (Trouble) |
@@ -216,7 +220,7 @@ works in the command line (`:`) — use `<Tab>` to accept there.
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `<Space>t` | n | Toggle the bottom-anchored floating terminal (confined to the editor area) |
+| `<C-\>` | n, t | Toggle the bottom-anchored floating terminal (confined to the editor area) |
 
 ## Debugging (DAP)
 
