@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-10-14
+
+### Fixed
+
+- **LSP never started.** Mason is lazy-loaded and adds `mason/bin` to `PATH`
+  only on first use, so `lua_ls`, `pyright`, `ruff`, `ts_ls`… were "not
+  executable" and no server attached. `options.lua` now puts `mason/bin` on
+  `PATH` at startup.
+- **Leader key clashes.** `<leader>d` (black-hole delete) shadowed the Debug
+  group and `<leader>t` (terminal) the Test group, so both waited for
+  `timeoutlen`. Black-hole delete is `<leader>D`, the terminal `<C-\>` (also
+  from inside it).
+- **nvim-lint errors on save:** `fixjson` is not a linter and eslint was not
+  installed (and does not lint CSS/HTML). Only installed linters run now
+  (ruff; eslint_d / eslint for JS/TS when present).
+- `sessionoptions` gains `localoptions` (auto-session health warning);
+  `foldlevelstart` is set globally (it was a no-op as a local option); lazy's
+  luarocks support is off; the `regex` parser is installed for noice.
+
+### Changed
+
+- **LSP keys follow Neovim's defaults** (`grr`, `gri`, `grt`, `gO`, `grn`,
+  `gra`); list results open in Telescope. `gr`, `gy`, `gI` are gone, `gd`
+  uses Telescope, `<leader>fS` searches project symbols.
+- `]d` / `[d` are the built-in ones; `]e` / `[e` use `vim.diagnostic.jump`.
+- No automatic hover popup on CursorHold — tiny-inline-diagnostic already
+  shows diagnostics; `K` still opens the combined window.
+- hardtime suggests better motions instead of blocking keys.
+- `vim.hl.on_yank` replaces the deprecated `vim.highlight.on_yank`.
+
 ## [0.7.6] - 2026-10-11
 
 ## [0.7.5] - 2026-10-11
