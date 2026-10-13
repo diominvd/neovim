@@ -25,8 +25,10 @@ local PROMPT = [[Ты — справочная система по Neovim. Пи�
 Обнаружено неэффективное действие: %s.
 Последние клавиши: %s. Режим: %s. Тип файла: %s. Строка под курсором: %s
 Проверенная рекомендация: %s
-Сформулируй рекомендацию для этой ситуации: 1–2 коротких предложения, только
-реальные команды Vim из рекомендации, без вступлений и без markdown-заголовков.]]
+Сформулируй рекомендацию для этой ситуации: 1–2 полных предложения, только
+реальные команды Vim из рекомендации, без списков, нумерации и заголовков.
+Пример ответа: «Курсор перемещался по одной строке. Для перехода на шесть строк
+вниз используйте `6j`, к следующему абзацу — `}`.»]]
 
 local function notify(text)
   vim.schedule(function()
@@ -45,13 +47,16 @@ local function ask_model(finding, ctx)
   vim.system({ "curl", "-s", "--max-time", "20", M.config.url, "-d", body }, { text = true }, function(res)
     busy = false
     local ok, data = pcall(vim.json.decode, res.stdout or "")
-    local text = ok and type(data) == "table" and data.response
-    if res.code ~= 0 or not text or text:match("^%s*$") then
+    local text = ok and type(data) == "table" and vim.trim(data.response or "") or ""
+    if res.code ~= 0 or not ok then
       offline_until = os.time() + 600
       notify(finding.tip)
       return
     end
-    notify(vim.trim(text))
+    -- A small model sometimes answers with a bare list item; keep the
+    -- verified tip unless the answer reads like a sentence.
+    local usable = #text >= 40 and not text:match("^%d+%.") and text:match("[%.!]%s*$")
+    notify(usable and text or finding.tip)
   end)
 end
 
