@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.1] - 2026-10-14
+
+### Changed
+
+- Coach tips are written in a neutral, documentation-like style (built-in tips
+  and the model prompt); the notification title is "Coach".
+
 ## [0.9.0] - 2026-10-14
 
 ### Added
