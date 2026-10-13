@@ -146,6 +146,9 @@ map("n", "<leader>fmt", function()
     timeout_ms = 1500,
   })
 end, "Format buffer")
+map("n", "<leader>uc", function()
+  require("coach").toggle()
+end, "Toggle habit coach")
 map("n", "<leader>uF", function()
   vim.g.disable_autoformat = not vim.g.disable_autoformat
   if vim.g.disable_autoformat then

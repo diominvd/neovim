@@ -56,6 +56,7 @@ Pressing `<Space>` shows a popup with every group and mapping.
 | `<Space>y` | n | Yank line (`yy`) |
 | `<Space>y` | v | Yank the selection |
 | `<Space>uF` | n | Toggle auto-format on save (conform) |
+| `<Space>uc` | n | Toggle the habit coach (`:Coach`) |
 | `<Space>fmt` | n | Format current buffer (conform, falls back to LSP) |
 | `<Space>e` | n | Toggle neo-tree file explorer |
 | `<Space>E` | n | Collapse the explorer tree to its root (close all open folders) |
@@ -215,6 +216,19 @@ Move (next / previous):
 Documentation for the highlighted candidate opens automatically (after ~200 ms),
 and a signature-help popup appears while a call is being typed. Completion also
 works in the command line (`:`) — use `<Tab>` to accept there.
+
+## Habit coach
+
+Watches what you type and, when it spots an inefficient habit (`jjjjjj`,
+`xxxx`, arrows, `dd dd dd`, backspacing words…), pops a short tip — "Братан,
+…". With [Ollama](https://ollama.com) running locally a small model
+(`qwen2.5:1.5b`) phrases the tip for the situation; without it the built-in
+tip is shown. At most one tip per 90 s; toggle with `<Space>uc` / `:Coach`.
+
+```
+sudo pacman -S ollama && sudo systemctl enable --now ollama
+ollama pull qwen2.5:1.5b
+```
 
 ## Terminal
 

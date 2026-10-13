@@ -1,5 +1,8 @@
 return {
 	"m4xshen/hardtime.nvim",
+	-- Off: the coach (lua/coach) watches the same habits and explains them;
+	-- both at once would double every hint.
+	enabled = false,
 	lazy = false,
 	dependencies = {
 		"MunifTanjim/nui.nvim",
