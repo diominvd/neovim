@@ -40,17 +40,20 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Flash — motion with labels.
 * Conform — format on save (StyLua, Ruff, fixjson, prettierd).
 * Gitsigns — git hunks, diff, preview, blame.
-* Hardtime — blocks arrows/mouse and hints better motions while you learn
-  (`:Hardtime toggle` / `:Hardtime report`).
+* **Habit coach** (`lua/coach`) — watches what you type and, on an inefficient
+  habit (`jjjjjj`, `xxxx`, arrows, `dd dd dd`, backspacing words), shows a short
+  tip in a buddy tone. A local Ollama model (`qwen2.5:1.5b`) phrases it for the
+  situation when running; otherwise the built-in tip. `<Space>uc` / `:Coach`.
+  (hardtime is installed but disabled — the coach replaces it.)
 * Better-escape — `jk` / `kj` exit insert mode with no typing latency (the
   first key is inserted immediately).
 * Undotree — visual history of changes (`<Space>uu`).
 * Mini.surround — surround editing (`gsa` / `gsd` / `gsr`).
-* Snacks (indent + scroll + word references + terminal + statuscolumn + gitbrowse + zen + bufdelete + rename + bigfile) — indent guides, a scrollbar, reference highlighting, a bottom-anchored floating terminal (`<Space>t`) confined to the editor area, a richer status column, browser-open for git remotes, zen mode, safe buffer delete and graceful degradation on huge files.
+* Snacks (indent + scroll + word references + terminal + statuscolumn + gitbrowse + zen + bufdelete + rename + bigfile) — indent guides, a scrollbar, reference highlighting, a bottom-anchored floating terminal (`<C-\>`) confined to the editor area, a richer status column, browser-open for git remotes, zen mode, safe buffer delete and graceful degradation on huge files.
 * **Debugging** — `nvim-dap` + `nvim-dap-ui` + `nvim-dap-virtual-text`, with Python (`debugpy`) and Node.js (`node2`) adapters installed by Mason. See [KEYBINDINGS › Debugging (DAP)](KEYBINDINGS.md#debugging-dap).
 * **Testing** — `neotest` with pytest and Vitest adapters, results streamed inline and summarised in a tree.
 * **AI** — `opencode.nvim` (context injection, diff review, event hooks — `<Space>o…`) and `sidekick.nvim` (any AI CLI in a terminal — `<Space>a…`). Both need the `opencode` binary in `$PATH`; they are independent, keep whichever you prefer.
-* **Linting** — `nvim-lint` (ESLint for JS/TS/CSS/HTML, Ruff for Python, fixjson for JSON) on save, next to the LSP diagnostics.
+* **Linting** — `nvim-lint` on save, next to the LSP diagnostics: Ruff for Python, eslint_d / ESLint for JS/TS when installed (missing linters are skipped).
 * **Git diff** — `diffview.nvim` for side-by-side diffs, file history and merge conflicts.
 * **Project-wide search & replace** — `grug-far.nvim`.
 * **IDE polish** — `mini.icons` (replaces `nvim-web-devicons`), `guess-indent.nvim` (auto-detect tabs/spaces), `fidget.nvim` (LSP progress), `tiny-inline-diagnostic.nvim` (modern inline diagnostics), `nvim-lsp-file-operations` (auto-update imports when a file is renamed/moved).
@@ -59,7 +62,8 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Smart search — `ignorecase` + `smartcase`, live `:s` preview.
 * Visible trailing whitespace and tabs (stripped on save, skips prose and binaries).
 * Soft wrapping only for prose filetypes (markdown, text, tex, rst).
-* Diagnostics + LSP hover window auto-opens on `CursorHold` only over an error/warning line; `K` forces it anywhere.
+* Diagnostics show inline (tiny-inline-diagnostic); `K` opens hover + diagnostics in one window.
+* LSP keys are Neovim's defaults (`grr`, `gri`, `grt`, `gO`, `grn`, `gra`), list results in Telescope.
 * Inlay hints toggle per buffer (`<Space>ih`).
 * Treesitter-based folding for every buffer with a parser.
 * Yank highlight via `vim.highlight.on_yank`.
@@ -150,6 +154,7 @@ Currently configured: TypeScript/React, CSS, HTML, JSON, Lua, Python, Shell, C.
     │   ├── guess-indent.lua
     │   ├── lsp-file-operations.lua
     │   └── grug-far.lua
+    ├── coach/                 habit coach (rules + optional Ollama)
     ├── utils/
     │   └── hover.lua
     └── appearance/
@@ -197,7 +202,7 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 | `<Space>q` | Quit / Session |
 | `<Space>r` | Refactor |
 | `<Space>s` | Split |
-| `<Space>t` | Terminal |
+| `<Space>t` | Test (Neotest) |
 | `<Space>u` | Undo / Format |
 | `<Space>x` | Diagnostics / Trouble |
 
@@ -213,12 +218,12 @@ Leader is `<Space>`. Pressing `<Space>` shows all groups and mappings
 | `<leader>aa` / `<leader>as` | Toggle the AI CLI (Sidekick) / pick the tool |
 | `<leader>dc` / `<leader>db` | Debug: continue / breakpoint |
 | `<leader>tr` / `<leader>tf` | Run nearest / current file tests |
-| `gd` / `gr` | Go to definition / references |
+| `gd` / `grr` | Go to definition / references |
 | `]d` / `[d` | Next / previous diagnostic |
 | `<S-h>` / `<S-l>` | Previous / next buffer |
 | `s` / `S` | Flash jump / treesitter |
 | `gsa` / `gsd` / `gsr` | Add / delete / replace surrounding |
-| `<leader>t` | Toggle bottom-anchored floating terminal |
+| `<C-\>` | Toggle bottom-anchored floating terminal |
 | `<leader>gg` | Open lazygit fullscreen |
 | `<leader>hh` | Clear search highlight |
 | `<leader>uu` | Undo tree |
@@ -246,5 +251,5 @@ thing to link in a channel post about the update.
 | Icons missing | Install a [Nerd Font](https://www.nerdfonts.com/) |
 | Telescope grep empty | Install `ripgrep` |
 | Telescope find empty | Install `fd` |
-| LSP not working | Run `:MasonToolsInstall` (`<leader>Mi`) — or open `:Mason` and install the server |
+| LSP not working | Run `:MasonToolsInstall` (`<leader>Mi`) — or open `:Mason` and install the server; mason's `bin` is put on `PATH` at startup (`options.lua`) |
 | Plug-in not loading | Check `:Lazy` for errors |
