@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-10-14
+
+### Added
+
+- **Habit coach** (`lua/coach`): watches typed keys, spots inefficient
+  patterns (repeated `hjkl`/`w`/`b`, `x` runs, arrow keys, backspacing words,
+  `dd dd dd`) and shows a short tip in a buddy tone. A local Ollama model
+  (`qwen2.5:1.5b`) rephrases it for the situation when available; otherwise
+  the rule's own tip is shown. One tip per 90 s, `<leader>uc` / `:Coach`
+  toggles it.
+
+### Changed
+
+- hardtime is disabled — the coach covers the same habits.
+
 ## [0.8.0] - 2026-10-14
 
 ### Fixed
