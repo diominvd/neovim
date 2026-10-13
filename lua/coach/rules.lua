@@ -1,6 +1,6 @@
 -- Habit rules for the coach: each looks at the recent keys (newest last) and
 -- returns a finding { reason, tip } or nil. `reason` describes what happened
--- for the model; `tip` is the offline fallback, in the coach's voice.
+-- for the model; `tip` is the offline fallback, in a neutral technical style.
 
 local M = {}
 
@@ -35,8 +35,8 @@ M.list = {
     return {
       reason = ("pressed `%s` %d times in a row in %s mode"):format(k.key, n, k.mode),
       tip = vertical
-          and ("Братан, %d раз `%s` подряд — набери `%d%s`, прыгни `}`/`{` по абзацам, `]f` к следующей функции или `s` (flash) куда глаз смотрит."):format(n, k.key, n, k.key)
-        or ("Братан, %d раз `%s` — по строке быстрее `f<символ>`/`t<символ>`, `w`/`b` по словам, `0`/`$` в начало и конец."):format(n, k.key),
+          and ("Клавиша `%s` нажата %d раз подряд. Используйте счётчик `%d%s`, переход по абзацам `}` / `{`, к следующей функции `]f` или прыжок `s` (flash)."):format(k.key, n, n, k.key)
+        or ("Клавиша `%s` нажата %d раз подряд. Внутри строки используйте `f<символ>` / `t<символ>`, переход по словам `w` / `b`, к началу и концу строки `0` / `$`."):format(k.key, n),
     }
   end,
 
@@ -52,7 +52,7 @@ M.list = {
     end
     return {
       reason = ("pressed `%s` %d times to move across words"):format(k.key, n),
-      tip = ("Братан, %d раз `%s` — прыгни прямо к символу: `f<символ>` или `s` и пара букв (flash)."):format(n, k.key),
+      tip = ("Клавиша `%s` нажата %d раз подряд. Для перехода к нужному месту используйте `f<символ>` или прыжок `s` (flash)."):format(k.key, n),
     }
   end,
 
@@ -68,7 +68,7 @@ M.list = {
     end
     return {
       reason = ("deleted %d characters with `x` one by one"):format(n),
-      tip = "Братан, не долби `x`: слово — `dw`/`daw`, до конца строки — `D`, внутри кавычек — `di\"`.",
+      tip = "Посимвольное удаление `x` неэффективно. Слово: `dw` / `daw`, до конца строки: `D`, содержимое кавычек: `di\"`.",
     }
   end,
 
@@ -83,7 +83,7 @@ M.list = {
     end
     return {
       reason = ("used the arrow key %s repeatedly in %s mode"):format(k.key, k.mode),
-      tip = "Братан, стрелки далеко от рук — выйди в normal (`<Esc>`) и ходи `hjkl` или прыжками (`s`, `f`, `}`).",
+      tip = "Используются клавиши-стрелки. Рекомендуется перемещение в режиме normal: `hjkl` и прыжки (`s`, `f`, `}`).",
     }
   end,
 
@@ -99,7 +99,7 @@ M.list = {
     end
     return {
       reason = ("erased %d characters with backspace in insert mode"):format(n),
-      tip = "Братан, `<C-w>` стирает слово целиком, `<C-u>` — до начала строки. Или выйди и сделай `ciw`.",
+      tip = "Многократный Backspace. В режиме вставки `<C-w>` удаляет слово, `<C-u>` — текст до начала строки; в режиме normal — `ciw`.",
     }
   end,
 
@@ -118,7 +118,7 @@ M.list = {
     end
     return {
       reason = ("deleted %d lines with `dd` one at a time"):format(n),
-      tip = ("Братан, `%ddd` удалит разом, а `dap` — весь абзац, `daf` — функцию целиком."):format(n),
+      tip = ("Строки удаляются по одной. Используйте `%ddd`, для абзаца — `dap`, для функции — `daf`."):format(n),
     }
   end,
 }

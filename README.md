@@ -42,7 +42,7 @@ Minimal Neovim configuration built with [lazy.nvim](https://github.com/folke/laz
 * Gitsigns — git hunks, diff, preview, blame.
 * **Habit coach** (`lua/coach`) — watches what you type and, on an inefficient
   habit (`jjjjjj`, `xxxx`, arrows, `dd dd dd`, backspacing words), shows a short
-  tip in a buddy tone. A local Ollama model (`qwen2.5:1.5b`) phrases it for the
+  tip in a neutral technical style. A local Ollama model (`qwen2.5:1.5b`) phrases it for the
   situation when running; otherwise the built-in tip. `<Space>uc` / `:Coach`.
   (hardtime is installed but disabled — the coach replaces it.)
 * Better-escape — `jk` / `kj` exit insert mode with no typing latency (the

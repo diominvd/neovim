@@ -220,8 +220,8 @@ works in the command line (`:`) — use `<Tab>` to accept there.
 ## Habit coach
 
 Watches what you type and, when it spots an inefficient habit (`jjjjjj`,
-`xxxx`, arrows, `dd dd dd`, backspacing words…), pops a short tip — "Братан,
-…". With [Ollama](https://ollama.com) running locally a small model
+`xxxx`, arrows, `dd dd dd`, backspacing words…), pops a short tip written in a
+neutral, documentation-like style. With [Ollama](https://ollama.com) running locally a small model
 (`qwen2.5:1.5b`) phrases the tip for the situation; without it the built-in
 tip is shown. At most one tip per 90 s; toggle with `<Space>uc` / `:Coach`.
 

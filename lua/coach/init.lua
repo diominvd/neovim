@@ -20,16 +20,17 @@ local last_tip = 0
 local busy = false
 local offline_until = 0 -- skip the model for a while after it failed
 
-local PROMPT = [[Ты — наставник по Neovim, общаешься по-свойски, как братан, по-русски.
-Пользователь только что сделал неэффективно: %s.
+local PROMPT = [[Ты — справочная система по Neovim. Пиши по-русски в официально-техническом
+стиле: безлично, без обращений, без сленга и эмоций, как в документации.
+Обнаружено неэффективное действие: %s.
 Последние клавиши: %s. Режим: %s. Тип файла: %s. Строка под курсором: %s
-Проверенный совет: %s
-Перефразируй совет под эту ситуацию: 1–2 коротких предложения, обращение «братан»,
-только реальные команды Vim из совета, без вступлений и без markdown-заголовков.]]
+Проверенная рекомендация: %s
+Сформулируй рекомендацию для этой ситуации: 1–2 коротких предложения, только
+реальные команды Vim из рекомендации, без вступлений и без markdown-заголовков.]]
 
 local function notify(text)
   vim.schedule(function()
-    vim.notify(text, vim.log.levels.INFO, { title = "Братан" })
+    vim.notify(text, vim.log.levels.INFO, { title = "Coach" })
   end)
 end
 
@@ -94,7 +95,7 @@ end
 
 function M.toggle()
   M.config.enabled = not M.config.enabled
-  vim.notify("Coach " .. (M.config.enabled and "on" or "off"), vim.log.levels.INFO, { title = "Братан" })
+  vim.notify("Coach " .. (M.config.enabled and "on" or "off"), vim.log.levels.INFO, { title = "Coach" })
 end
 
 function M.setup(opts)
